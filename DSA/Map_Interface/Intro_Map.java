@@ -1,9 +1,7 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.DSA.Map_Interface;
+package Java_Bootcamp.DSA.Map_Interface;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Intro_Map {
 

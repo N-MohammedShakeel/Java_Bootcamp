@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Arrays;
+package Java_Bootcamp.Arrays;
 
 public class DifferentColumns {
     public static void main(String[] args) {

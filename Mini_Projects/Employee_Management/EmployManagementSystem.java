@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Mini_Projects.Employee_Management;
+package Java_Bootcamp.Mini_Projects.Employee_Management;
 
 import java.util.*;
 import java.io.*;

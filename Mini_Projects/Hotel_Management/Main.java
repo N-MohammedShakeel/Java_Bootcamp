@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Mini_Projects.Hotel_Management;
+package Java_Bootcamp.Mini_Projects.Hotel_Management;
 
 import java.io.File;
 import java.io.FileInputStream;

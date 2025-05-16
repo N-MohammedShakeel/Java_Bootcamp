@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Greedy;
+package Java_Bootcamp.Greedy;
 
 
 public class ValidParanthesis {

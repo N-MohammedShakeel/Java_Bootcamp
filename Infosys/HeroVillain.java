@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Infosys;
+package Java_Bootcamp.Infosys;
 
 import java.util.Scanner;
 

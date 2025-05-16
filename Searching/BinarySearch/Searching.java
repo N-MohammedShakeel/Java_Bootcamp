@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Searching.BinarySearch;
+package Java_Bootcamp.Searching.BinarySearch;
 
 public class Searching {
     public static void main(String[] args) {

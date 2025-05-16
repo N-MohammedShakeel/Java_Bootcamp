@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.DSA.Linked_List;
+package Java_Bootcamp.DSA.Linked_List;
 
 public class LL {
 
@@ -237,30 +237,57 @@ public class LL {
     }
 
     public static void main(String[] args) {
-        LL first = new LL();
-        LL second = new LL();
-
-        first.insertFirst(2);
-        first.insertLast(1);
-        first.insertLast(3);
-        first.insertLast(5);
-
-        second.insertLast(1);
-        second.insertLast(2);
-        second.insertLast(9);
-        second.insertLast(14);
-
+//        LL first = new LL();
+//        LL second = new LL();
+//
+//        first.insertFirst(2);
+//        first.insertLast(1);
+//        first.insertLast(3);
+//        first.insertLast(5);
+//
+//        second.insertLast(1);
+//        second.insertLast(2);
+//        second.insertLast(9);
+//        second.insertLast(14);
+//
+//
+//        LL list = new LL();
+//        for (int i = 7; i > 0; i--) {
+//            list.insertLast(i);
+//        }
+//        list.display();
+//        list.bubbleSort();
+//        list.display();
 
         LL list = new LL();
-        for (int i = 7; i > 0; i--) {
-            list.insertLast(i);
-        }
+
+        list.insertLast(1);
+        list.insertLast(2);
+        list.insertLast(3);
+        list.insertLast(4);
+        list.insertLast(5);
+        list.insertLast(6);
+
+        System.out.println("Middle value: " + findMiddle(list.head));
+
         list.display();
-        list.bubbleSort();
-        list.display();
+
 
     }
 
 
+    static int findMiddle(Node head){
+
+        Node slow = head;
+        Node fast = head;
+
+        while(fast != null && fast.next != null){
+
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow.value;
+    }
 
 }

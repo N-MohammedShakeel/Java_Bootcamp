@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.DSA.List_Interface;
+package Java_Bootcamp.DSA.List_Interface;
 
 import java.util.Iterator;
 import java.util.LinkedList;

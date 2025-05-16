@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.String;
+package Java_Bootcamp.String;
 
 
 public class Problems {

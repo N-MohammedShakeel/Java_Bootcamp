@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.DSA.Linked_List;
+package Java_Bootcamp.DSA.Linked_List;
 
 public class CLL {
 

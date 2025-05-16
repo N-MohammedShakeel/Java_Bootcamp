@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.OOP;
+package Java_Bootcamp.OOP.Encapsulation;
 
 public class Encapsulation {
     public static void main(String[] args)
@@ -57,5 +57,37 @@ class Test{
         System.out.println(e.getPrice());
         Demo e1= new Demo(2000);
         System.out.println(e1.getPrice());
+
+
+        EncapFB fb = new EncapFB("ABC","123",794823499);
+        System.out.println(fb.getPhone("ABCsd","123"));
+    }
+}
+
+
+class EncapFB {
+    private String username;
+    private String password;
+    private long phno;
+
+
+    EncapFB(String username,String password,long phno){
+        this.username=username;
+        this.password=password;
+        setPhone(phno);
+    }
+
+    void setPhone (long phno){
+        this.phno=phno;
+    }
+
+    long getPhone(String username,String password){
+        if(this.username == username&&this.password == password){
+            return phno;
+        }
+        else{
+            System.out.println("Invalid Credential");
+        }
+        return 0;
     }
 }

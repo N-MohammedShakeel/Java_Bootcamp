@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.DSA.Queue_Interface;
+package Java_Bootcamp.DSA.Queue_Interface;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

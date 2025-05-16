@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.JavaBasics;
+package Java_Bootcamp.JavaBasics;
 
 import java.util.Scanner;
 

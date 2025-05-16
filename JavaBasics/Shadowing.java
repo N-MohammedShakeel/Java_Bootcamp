@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.JavaBasics;
+package Java_Bootcamp.JavaBasics;
 
 public class Shadowing {
     static int x = 90; // this will be shadowed at line 7

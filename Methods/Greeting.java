@@ -1,4 +1,4 @@
-package java_BASIC_OOPS_DSA_PROJECTS_PROBLEMS.Methods;
+package Java_Bootcamp.Methods;
 
 public class Greeting {
     public static void main(String[] args) {
