@@ -1,9 +1,11 @@
-package Java_Bootcamp.OOP.OOP_Design;
+package Java_Bootcamp.Methods;
+
+import java.lang.String;
 
 public class Method_Chaining {
 
     private int id;
-    private String name;
+    private java.lang.String name;
 
     public int getId(){
         return id;
@@ -14,11 +16,11 @@ public class Method_Chaining {
         return this;
     }
 
-    public String getName(){
+    public java.lang.String getName(){
         return name;
     }
 
-    public Method_Chaining setName(String name){
+    public Method_Chaining setName(java.lang.String name){
         this.name = name;
         return this;
     }

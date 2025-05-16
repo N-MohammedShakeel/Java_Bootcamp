@@ -1,4 +1,4 @@
-package Java_Bootcamp.JavaBasics;
+package Java_Bootcamp.Java_Basics;
 
 public class HelloWorld {
     public static void main(String[] args)
