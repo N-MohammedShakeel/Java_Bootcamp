@@ -34,14 +34,3 @@ public class Bank {
     }
 }
 
-
-class Human{
-    public static void main(String[] args) {
-        Bank b = new Bank(10800 , 2004);
-
-//        b.setPin(2004);
-//        b.setMoney(1000);
-
-        System.out.println(b.getMoney(2004));
-    }
-}
