@@ -1,6 +1,6 @@
 package Java_Bootcamp.OOP.Encapsulation;
 
-class Driver{
+class Main {
     public static void main(String[] args) {
 
         //Person

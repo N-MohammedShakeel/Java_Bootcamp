@@ -22,20 +22,20 @@ public class LLDriver {
         System.out.println("Original List:");
         list.display();
 
-        System.out.println("\nAfter Bubble Sort:");
-        list.bubbleSort();
-        list.display();
-
-        System.out.println("\nAfter Reversing:");
-        list.reverse();
-        list.display();
-
-        System.out.println("\nReversing Recursively:");
-        list.reverseRecursively();
-        list.display();
-
-        System.out.println("\nMiddle Node:");
-        LLNode middle = LL.findMiddle(list.getHead());
-        System.out.println("Middle: " + (middle != null ? middle.getValue() : "null"));
+//        System.out.println("\nAfter Bubble Sort:");
+//        list.bubbleSort();
+//        list.display();
+//
+//        System.out.println("\nAfter Reversing:");
+//        list.reverse();
+//        list.display();
+//
+//        System.out.println("\nReversing Recursively:");
+//        list.reverseRecursively();
+//        list.display();
+//
+//        System.out.println("\nMiddle Node:");
+//        LLNode middle = LL.findMiddle(list.getHead());
+//        System.out.println("Middle: " + (middle != null ? middle.getValue() : "null"));
     }
 }
