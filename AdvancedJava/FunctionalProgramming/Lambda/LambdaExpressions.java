@@ -1,4 +1,4 @@
-package Java_Bootcamp.FunctionalProgramming.Lambda;// Java Fundamentals: Lambda Expressions
+package Java_Bootcamp.AdvancedJava.FunctionalProgramming.Lambda;// Java Fundamentals: Lambda Expressions
 // Aligned with Oracle Certified Professional: Java SE 17 Developer syllabus
 
 /*

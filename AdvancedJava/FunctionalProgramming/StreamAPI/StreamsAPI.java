@@ -1,4 +1,4 @@
-package Java_Bootcamp.FunctionalProgramming.StreamAPI;// Java Fundamentals: Streams API
+package Java_Bootcamp.AdvancedJava.FunctionalProgramming.StreamAPI;// Java Fundamentals: Streams API
 // Aligned with Oracle Certified Professional: Java SE 17 Developer syllabus
 
 /*
