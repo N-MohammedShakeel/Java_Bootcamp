@@ -92,50 +92,57 @@ Annotations and Metadata Overview
 // Custom annotation definition
 
 // Simple annotation processor simulation (reflection-based, not compile-time)
+
+import jdk.jfr.Category;
+
 import java.lang.reflect.Method;
 
-
 public class AnnotationsAndMetadata {
-    public static void main(String[] args) throws Exception {
-        // Example 1: Built-in Annotations
-        System.out.println("Example 1: Built-in Annotations");
-        Child child = new Child();
-        System.out.println("Child toString: " + child); // Uses @Override
-        @SuppressWarnings("deprecation")
-        Parent parent = new Parent();
-        parent.oldMethod(); // Compiler warns unless suppressed
+    public static void main(String[] args) {
+        try {
+            // Example 1: Built-in Annotations
+            System.out.println("Example 1: Built-in Annotations");
+            Child child = new Child();
+            System.out.println("Child toString: " + child); // Uses @Override
+            @SuppressWarnings("deprecation")
+            Parent parent = new Parent();
+            parent.oldMethod(); // Compiler warns unless suppressed
 
-        // Example 2: Custom Annotation with Reflection
-        System.out.println("\nExample 2: Custom Annotation (Task)");
-        Class<?> workflowClass = Workflow.class;
-        for (Method method : workflowClass.getDeclaredMethods()) {
-            Task task = method.getAnnotation(Task.class);
-            if (task != null) {
-                System.out.println("Method: " + method.getName());
-                System.out.println("Description: " + task.description());
-                System.out.println("Priority: " + task.priority());
-            }
-        }
-
-        // Example 3: Repeatable Annotations
-        System.out.println("\nExample 3: Repeatable Annotations (Category)");
-        Category[] categories = workflowClass.getAnnotationsByType(Category.class);
-        System.out.print("Categories: ");
-        for (Category category : categories) {
-            System.out.print(category.value() + " ");
-        }
-        System.out.println();
-
-        // Example 4: Simulating Annotation Processing
-        System.out.println("\nExample 4: Simulating Annotation Processing");
-        for (Method method : workflowClass.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(Task.class)) {
+            // Example 2: Custom Annotation with Reflection
+            System.out.println("\nExample 2: Custom Annotation (Task)");
+            Class<?> workflowClass = Workflow.class;
+            for (Method method : workflowClass.getDeclaredMethods()) {
                 Task task = method.getAnnotation(Task.class);
-                if (task.priority() > 1) {
-                    System.out.println("High-priority task: " + task.description());
-                    method.invoke(new Workflow()); // Execute high-priority method
+                if (task != null) {
+                    System.out.println("Method: " + method.getName());
+                    System.out.println("Description: " + task.description());
+                    System.out.println("Priority: " + task.priority());
                 }
             }
+
+            // Example 3: Repeatable Annotations
+            System.out.println("\nExample 3: Repeatable Annotations (Category)");
+            Category[] categories = workflowClass.getAnnotationsByType(Category.class);
+            System.out.print("Categories: ");
+            for (Category category : categories) {
+                System.out.print(category.value() + " ");
+            }
+            System.out.println();
+
+            // Example 4: Simulating Annotation Processing
+            System.out.println("\nExample 4: Simulating Annotation Processing");
+            for (Method method : workflowClass.getDeclaredMethods()) {
+                if (method.isAnnotationPresent(Task.class)) {
+                    Task task = method.getAnnotation(Task.class);
+                    if (task.priority() > 1) {
+                        System.out.println("High-priority task: " + task.description());
+                        method.invoke(new Workflow()); // Execute high-priority method
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error during reflection or method invocation: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

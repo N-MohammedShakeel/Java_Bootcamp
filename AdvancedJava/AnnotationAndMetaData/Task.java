@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 // Annotation for marking methods with priority and description
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@interface Task {
+public @interface Task {
     String description();
 
     int priority() default 1;
