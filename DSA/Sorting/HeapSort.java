@@ -1,4 +1,4 @@
-package Java_Bootcamp.Sorting;
+package Java_Bootcamp.DSA.Sorting;
 
 public class HeapSort {
     public static void main(String[] args) {

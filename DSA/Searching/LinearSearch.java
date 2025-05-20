@@ -1,4 +1,4 @@
-package Java_Bootcamp.Searching;
+package Java_Bootcamp.DSA.Searching;
 
 public class LinearSearch {
     public static void main(String[] args) {

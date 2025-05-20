@@ -1,4 +1,4 @@
-package Java_Bootcamp.DynamicProgramming;
+package Java_Bootcamp.DSA.DynamicProgramming;
 
 import java.util.Arrays;
 

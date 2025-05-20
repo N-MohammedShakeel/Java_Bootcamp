@@ -1,4 +1,4 @@
-package Java_Bootcamp.Greedy;
+package Java_Bootcamp.DSA.Greedy;
 
 import java.util.*;
 
