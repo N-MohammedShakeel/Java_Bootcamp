@@ -79,7 +79,7 @@ public class Enums {
         for (Day day : Day.values()) {
             System.out.print(day + " ");
         }
-        System.out.println();
+        System.out.println(); // All days: MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY SATURDAY SUNDAY
 
         // Example 2: Enum in Switch Statement
         System.out.println("\nEnum in Switch Statement:");
@@ -95,7 +95,7 @@ public class Enums {
                 break;
             default:
                 System.out.println(today + " is the weekend!");
-        }
+        } // FRIDAY is almost the weekend!
 
         // Example 3: Enum with Fields and Methods
         System.out.println("\nEnum with Fields and Methods (Size):");
@@ -113,5 +113,8 @@ public class Enums {
             System.out.printf("%s: %.2f %s %.2f = %.2f%n", 
                               op, x, op.name(), y, op.apply(x, y));
         }
+        // ADD: 10.00 ADD 5.00 = 15.00
+        // SUBTRACT: 10.00 SUBTRACT 5.00 = 5.00
+        // MULTIPLY: 10.00 MULTIPLY 5.00 = 50.00
     }
 }
