@@ -9,8 +9,13 @@ public class Problems_1D {
         int[] arr = new int[5];
         getArray(arr);
 
-        // Easy
 
+//        longestSubArrayOfSumByTwoPointer(arr,3);
+//        longestSubArrayOfSumByHashMap(arr,3);
+//        longestSubArrayOfSum(arr,3);
+//        findMaxConsecutiveOnes(arr);
+//        missingNumberXOR(arr);
+//        missingNumberSum(arr);
 //        findIntersectionByTwoPointers(arr,arr);
 //        findIntersectionByHashMap(arr,arr);
 //        findIntersection(arr,arr);
@@ -48,13 +53,130 @@ public class Problems_1D {
 //        combineTwoArraysMethod1(arr);
 //        combineTwoArraysMethod1(arr);
 //        isSorted(arr);
-
-
-        // Medium
 //        twoSum(arr,4);
 //        plusOne(arr);
 
         printArray(arr);
+    }
+
+
+    static void longestSubArrayOfSumByTwoPointer(int[] arr, int targetSum) {
+        //  This is a Sliding Window technique — implemented using Two Pointers.
+        int start = 0, end = 0;
+        int currentSum = 0;
+        int maxLength = 0;
+
+        while (end < arr.length) {
+            currentSum += arr[end];
+
+            while (currentSum > targetSum && start <= end) {
+                currentSum -= arr[start];
+                start++;
+            }
+
+            if (currentSum == targetSum) {
+                maxLength = Math.max(maxLength, end - start + 1);
+            }
+
+            end++;
+        }
+
+        System.out.println("Length of Longest Subarray with sum " + targetSum + " is: " + maxLength);
+    }
+
+
+    static void longestSubArrayOfSumByHashMap(int[] arr, int targetSum) {
+        HashMap<Integer, Integer> prefixSumMap = new HashMap<>();
+        int currSum = 0;
+        int maxLength = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            currSum += arr[i];
+
+            if (currSum == targetSum) {
+                maxLength = i + 1;
+            }
+
+            if (prefixSumMap.containsKey(currSum - targetSum)) {
+                int length = i - prefixSumMap.get(currSum - targetSum);
+                maxLength = Math.max(maxLength, length);
+            }
+
+            // Store only the first occurrence of currSum
+            if (!prefixSumMap.containsKey(currSum)) {
+                prefixSumMap.put(currSum, i);
+            }
+        }
+        System.out.println("Length of Longest Subarray with sum " + targetSum + " is: " + maxLength);
+    }
+
+
+    static void longestSubArrayOfSum(int[] arr, int sum) {
+        int maxLen = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            int currentSum = 0;
+
+            for (int j = i; j < arr.length; j++) {
+                currentSum += arr[j];
+
+                if (currentSum == sum) {
+                    int len = j - i + 1;
+                    maxLen = Math.max(maxLen, len);
+                }
+            }
+        }
+        System.out.println("Length of Longest Subarray: " + maxLen);
+    }
+
+
+    static void findMaxConsecutiveOnes(int[] arr) {
+
+        int count = 0;
+        int max = 0;
+        for (int num : arr) {
+            if (num == 1) {
+                count++;
+            } else {
+                count = 0;
+            }
+            max = Math.max(max, count);
+        }
+        System.out.println("Max Consecutive Ones: " + max);
+    }
+
+    static void missingNumberXOR(int[] arr) {
+        int xor1 = 0;
+        int xor2 = 0;
+        int n = arr.length;
+
+        // XOR of all numbers from 0 to n
+        for (int i = 0; i <= n; i++) {
+            xor1 ^= i;
+        }
+
+        // XOR of all elements in the array
+        for (int num : arr) {
+            xor2 ^= num;
+        }
+
+        System.out.println(xor1);
+        System.out.println(xor2);
+
+        System.out.println("Missing Number: " + (xor1 ^ xor2));
+    }
+
+
+    static void missingNumberSum(int[] arr) {
+        int n = arr.length;
+        int expectedSum = n * (n + 1) / 2;
+
+        int actualSum = 0;
+        for (int num : arr) {
+            actualSum += num;
+        }
+
+        System.out.println("Missing Number: " + (expectedSum - actualSum));
     }
 
 
