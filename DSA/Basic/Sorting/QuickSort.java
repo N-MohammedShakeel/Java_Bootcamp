@@ -9,33 +9,81 @@ public class QuickSort {
         // Solution: Implement Quick Sort
         quickSort(arr, 0, arr.length - 1);
         System.out.println("Sorted array: " + java.util.Arrays.toString(arr));
+
+        /*
+         * Time Complexity:
+         * Best Case: O(n log n) — when partitions are balanced
+         * Average Case: O(n log n) — expected performance with random pivots
+         * Worst Case: O(n^2) — when the pivot is always min or max (unbalanced split)
+
+         * Space Complexity:
+         * O(log n) — due to recursive call stack (in-place sorting, no extra array)
+         */
     }
 
     // Quick Sort: Choose a pivot, partition array around it, and recursively sort sub-arrays
-    private static void quickSort(int[] arr, int low, int high) {
+    static void quickSort(int[] arr, int low, int high) {
         if (low < high) {
-            int pi = partition(arr, low, high);
-            quickSort(arr, low, pi - 1);
-            quickSort(arr, pi + 1, high);
+            // Partition the array and get pivot index
+            int pivotIndex = partition(arr, low, high);
+
+            // Recursively sort left and right subarrays
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
         }
     }
 
-    private static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j < high; j++) {
-            if (arr[j] <= pivot) {
+    /*
+     * Hoare's partition:
+     * - Chooses first element as pivot
+     * - Partitions the array so that elements <= pivot are on left,
+     *   elements >= pivot are on right.
+     */
+    static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low ;
+        int j = high;
+
+        while (i < j){
+            while (arr[i] < pivot){
                 i++;
-                // Swap elements
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
             }
+            while (arr[j] > pivot){
+                j--;
+            }
+
+            if(i >= j) return j;
+
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
-        // Place pivot in correct position
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-        return i + 1;
+        return -1;
     }
+
+
+    // Actual Hoare's partition code
+//    static int partition(int[] arr, int low, int high) {
+//        int pivot = arr[low];
+//        int i = low - 1;
+//        int j = high + 1;
+//
+//        while (true) {
+//            do {
+//                i++;
+//            } while (arr[i] < pivot);
+//
+//            do {
+//                j--;
+//            } while (arr[j] > pivot);
+//
+//            if (i >= j)
+//                return j;
+//
+//            // Swap arr[i] and arr[j]
+//            int temp = arr[i];
+//            arr[i] = arr[j];
+//            arr[j] = temp;
+//        }
+//    }
 }
