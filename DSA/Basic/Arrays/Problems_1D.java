@@ -1,7 +1,6 @@
 package Java_Bootcamp.DSA.Basic.Arrays;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Problems_1D {
 
@@ -11,6 +10,15 @@ public class Problems_1D {
         getArray(arr);
 
         // Easy
+
+//        findIntersectionByTwoPointers(arr,arr);
+//        findIntersectionByHashMap(arr,arr);
+//        findIntersection(arr,arr);
+//        findUnionByTwoPointers(arr,arr);
+//        findUnionByHashSet(arr,arr);
+//        findUnionByHashMap(arr,arr);
+//        moveZeros(arr);
+//        rotateRightOptimized(arr, arr.length-1 , 3);
 //        rotateArrayClockwise(arr,3);
 //        rotateArrayAntiClockwise(arr,3);
 //        firstHalfClockwise(arr,3);
@@ -24,7 +32,6 @@ public class Problems_1D {
 //        findMissingNumber(arr,5);
 //        System.out.println(ismountainArray(arr));
 //        removeDuplicate(arr);
-//        reverse(arr);
 //        arrayElementSquare(arr);
 //        arraySum(arr);
 //        arrayMax(arr);
@@ -40,6 +47,7 @@ public class Problems_1D {
 //        elementsFrequency(arr);
 //        combineTwoArraysMethod1(arr);
 //        combineTwoArraysMethod1(arr);
+//        isSorted(arr);
 
 
         // Medium
@@ -47,8 +55,173 @@ public class Problems_1D {
 //        plusOne(arr);
 
         printArray(arr);
+    }
 
 
+    static void findIntersectionByTwoPointers(int[] arr1, int[] arr2) {
+        int i = 0, j = 0;
+        ArrayList<Integer> intersection = new ArrayList<>();
+
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] == arr2[j]) {
+                intersection.add(arr1[i]);
+                i++;
+                j++;
+            } else if (arr1[i] < arr2[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        System.out.println("Intersection: " + intersection);
+    }
+
+    static void findIntersectionByHashMap(int[] arr1, int[] arr2) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        HashMap<Integer, Integer> freq = new HashMap<>();
+
+        for (int num : arr2) {
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
+        }
+
+        for (int num : arr1) {
+            if (freq.getOrDefault(num, 0) > 0) {
+                ans.add(num);
+                freq.put(num, freq.get(num) - 1);
+            }
+        }
+
+        System.out.println("Intersection: " + ans);
+    }
+
+
+
+    static void findIntersection(int[] arr1, int[] arr2){
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        for (int k : arr1) {
+            for (int j = 0; j < arr2.length; j++) {
+                if (k == arr2[j]) {
+                    ans.add(k);
+                    arr2[j] = -1;
+                    break;
+                }
+            }
+        }
+        System.out.println("Intersection: " + ans);
+    }
+
+    static void findUnionByTwoPointers(int[] arr1, int[] arr2) {
+        int n = arr1.length , m = arr2.length;
+        int i = 0, j = 0;
+        ArrayList<Integer > Union = new ArrayList<>();
+
+        while (i < n && j < m) {
+
+            if (arr1[i] <= arr2[j])
+            {
+                if (Union.isEmpty() || Union.getLast() != arr1[i])
+                    Union.add(arr1[i]);
+                i++;
+
+            } else
+            {
+                if (Union.isEmpty() || Union.getLast() != arr2[j])
+                    Union.add(arr2[j]);
+                j++;
+            }
+
+        }
+
+        while (i < n) // IF any element left in arr1
+        {
+            if (Union.getLast() != arr1[i])
+                Union.add(arr1[i]);
+            i++;
+        }
+
+        while (j < m) // If any elements left in arr2
+        {
+            if (Union.getLast() != arr2[j])
+                Union.add(arr2[j]);
+            j++;
+        }
+
+        System.out.println("Union: " + Union);
+    }
+
+    static void findUnionByHashSet(int[] arr1, int[] arr2) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i : arr1)
+            set.add(i);
+        for (int i : arr2)
+            set.add(i);
+
+        ArrayList<Integer> Union = new ArrayList<>(set);
+
+        System.out.println("Union: " + Union);
+    }
+
+    static void findUnionByHashMap(int[] arr1, int[] arr2) {
+
+        HashMap<Integer,Integer > freq = new HashMap<>();
+        for (int i : arr1)
+            freq.put(i,freq.getOrDefault(i,0)+1);
+
+        for (int i : arr2)
+            freq.put(i,freq.getOrDefault(i,0)+1);
+
+        ArrayList<Integer> Union = new ArrayList<>(freq.keySet());
+
+        System.out.println("Union: " + Union);
+    }
+
+
+    public static void moveZeros(int[] arr) {
+        int n = arr.length-1;
+        int j = -1;
+        //place the pointer j:
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 0) {
+                j = i;
+                break;
+            }
+        }
+
+        //no non-zero elements:
+        if (j == -1) return;
+
+        //Move the pointers i and j
+        //and swap accordingly:
+        for (int i = j + 1; i < n; i++) {
+            if (arr[i] != 0) {
+                //swap a[i] & a[j]:
+                swap(arr,i,j);
+                j++;
+            }
+        }
+    }
+
+    public static void rotateRightOptimized(int[] arr, int n, int k) {
+        // Reverse first n-k elements
+        Reverse(arr, 0, n - k - 1);
+        // Reverse last k elements
+        Reverse(arr, n - k, n - 1);
+        // Reverse whole array
+        Reverse(arr, 0, n - 1);
+    }
+
+    public static void Reverse(int[] arr, int start, int end) {
+        while (start <= end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
     }
 
     static void secondHalfAntiClockwise(int[] arr, int k){
@@ -145,12 +318,12 @@ public class Problems_1D {
         int[] res = new int[arr.length + arr1.length];
 
         int index = 0;
-        for (int i = 0; i < arr.length; i++) {
-            res[index++] = arr[i];
+        for (int j : arr) {
+            res[index++] = j;
         }
 
-        for (int i = 0; i < arr1.length; i++) {
-            res[index++] = arr1[i];
+        for (int j : arr1) {
+            res[index++] = j;
         }
         System.out.println("Array 1 : "+ Arrays.toString(arr));
         System.out.println("Array 2 : "+ Arrays.toString(arr1));
@@ -240,9 +413,9 @@ public class Problems_1D {
         }
         int[] arr1 = new int[arr.length - 1];
         int count =0 ;
-        for(int i=0 ; i<arr.length ; i++){
-            if (arr[i] != Integer.MAX_VALUE){
-                arr1[count] = arr[i];
+        for (int j : arr) {
+            if (j != Integer.MAX_VALUE) {
+                arr1[count] = j;
                 count++;
             }
         }
@@ -263,30 +436,13 @@ public class Problems_1D {
         }
 
         int count_un = 0;
-        for (int i=0 ; i<arr.length ; i++){
-            if(arr[i] != Integer.MAX_VALUE){
+        for (int j : arr) {
+            if (j != Integer.MAX_VALUE) {
                 count_un++;
             }
         }
 
         System.out.println("Unique: " + count_un + "\nDuplicate: " + count_dup);
-    }
-
-    static void reverse(int[] arr){
-
-        int count = 0;
-        int count_rev = arr.length-1;
-        while(count <= ((arr.length-1)/2)){
-            swap(arr,count,count_rev);
-            count++;
-            count_rev--;
-        }
-    }
-
-    static void swap(int[] arr,int i,int j){
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
     }
 
 
@@ -602,6 +758,43 @@ public class Problems_1D {
         System.out.println("Array 2 : "+ Arrays.toString(arr1));
         System.out.println("Resulted Array : "+ Arrays.toString(res));
     }
+
+    public static void isSorted(int[] arr){
+
+        boolean isSorted = true;
+        for(int i=1 ; i<arr.length ; i++){
+            if(arr[i] < arr[i-1]){
+                isSorted = false;
+            }
+        }
+
+        System.out.println("Is array Sorted: " + isSorted);
+    }
+
+
+    static void reverse(int[] arr){
+
+        int count = 0;
+        int count_rev = arr.length-1;
+        while(count <= ((arr.length-1)/2)){
+            swap(arr,count,count_rev);
+            count++;
+            count_rev--;
+        }
+    }
+
+    static void swap(int[] arr,int i,int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+
+
+
+
+
+
 
     public static void twoSum(int[] nums, int target) {
         for(int i=0 ; i<nums.length -1 ; i++){
