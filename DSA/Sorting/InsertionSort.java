@@ -9,19 +9,28 @@ public class InsertionSort {
         // Solution: Implement Insertion Sort
         insertionSort(arr);
         System.out.println("Sorted array: " + java.util.Arrays.toString(arr));
+
+        // Insertion Sort Algorithm
+        // Time Complexity:
+        //   - Best Case:    O(n)       -> Already sorted array
+        //   - Average Case: O(n^2)
+        //   - Worst Case:   O(n^2)     -> Reverse sorted array
+        //z
+        // Space Complexity:
+        //   - O(1): In-place sorting with constant extra space
     }
 
     // Insertion Sort: Build sorted array one element at a time by inserting elements in correct position
     private static void insertionSort(int[] arr) {
-        int n = arr.length;
-        for (int i = 1; i < n; i++) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
+
+        for (int i = 1; i < arr.length; i++) {
+            int j = i;
+            while (j >= 0 && arr[j-1] > arr[j]) {
+                int temp = arr[j-1];
+                arr[j-1] = arr[j];
+                arr[j] = temp;
                 j--;
             }
-            arr[j + 1] = key;
         }
     }
 }

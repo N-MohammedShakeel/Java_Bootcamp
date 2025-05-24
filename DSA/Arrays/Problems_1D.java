@@ -10,6 +10,7 @@ public class Problems_1D {
         int[] arr = new int[5];
         getArray(arr);
 
+        // Easy
 //        rotateArrayClockwise(arr,3);
 //        rotateArrayAntiClockwise(arr,3);
 //        firstHalfClockwise(arr,3);
@@ -24,7 +25,6 @@ public class Problems_1D {
 //        System.out.println(ismountainArray(arr));
 //        removeDuplicate(arr);
 //        reverse(arr);
-
 //        arrayElementSquare(arr);
 //        arraySum(arr);
 //        arrayMax(arr);
@@ -40,6 +40,9 @@ public class Problems_1D {
 //        elementsFrequency(arr);
 //        combineTwoArraysMethod1(arr);
 //        combineTwoArraysMethod1(arr);
+
+
+        // Medium
 //        twoSum(arr,4);
 //        plusOne(arr);
 
@@ -613,20 +616,21 @@ public class Problems_1D {
 
 
     public static void plusOne(int[] digits) {
-        getArray(digits);
-
         for (int i = digits.length - 1; i >= 0; i--) {
             if (digits[i] < 9) {
                 digits[i]++;
-                printArray(digits);
+                System.out.println(Arrays.toString(digits));
+                return;
             }
             digits[i] = 0;
         }
 
+        // If we are here, all digits were 9
         int[] newDigits = new int[digits.length + 1];
-        newDigits[0] = 1;
-        printArray(digits);
+        newDigits[0] = 1;  // e.g., 999 → 1000
+        System.out.println(Arrays.toString(newDigits));
     }
+
 
 
     static void getArray(int[] arr){
