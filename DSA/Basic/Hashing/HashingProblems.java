@@ -28,7 +28,7 @@ public class HashingProblems {
         System.out.println("\n=== Find Subarray with Given Sum ===");
         findSubarrayWithSum(arr4, targetSum); // Subarray from index 1 to 3
         
-        int[] arr5 = {1, 2, 2, 3, 3, 3};
+        int[] arr5 = {1, 2, 2, 3, 3, 3, 4};
         int k = 2;
         System.out.println("\n=== Top K Frequent Elements ===");
         int[] result = topKFrequent(arr5, k);
@@ -186,15 +186,29 @@ public class HashingProblems {
         for (int num : arr) {
             freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
         }
-        
+
         PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(
             (a, b) -> a.getValue() - b.getValue() // Min-heap based on frequency
         );
+
+        // (a, b) -> a.getValue() - b.getValue()
+        // is a lambda function (anonymous function) used to define custom sorting behavior for a PriorityQueue in Java.
+
+        // a.getValue() and b.getValue() return the frequency of the elements.
+
+        // The expression returns:
+        // - A negative value if a.getValue() < b.getValue(): a is placed before b
+        // - A positive value if a.getValue() > b.getValue(): b is placed before a
+        // - 0 if both frequencies are equal
+
+        // Therefore:
+        // - This creates a min-heap where the element with the smallest frequency stays at the top.
+        // - To create a max-heap (highest frequency on top), you would reverse it: (a, b) -> b.getValue() - a.getValue()
         
         for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
-            pq.offer(entry);
+            pq.offer(entry); // push freq-map
             if (pq.size() > k) {
-                pq.poll();
+                System.out.println("poll: "+ pq.poll()); // removes freq-map
             }
         }
         

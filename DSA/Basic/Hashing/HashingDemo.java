@@ -67,12 +67,12 @@ package Java_Bootcamp.DSA.Basic.Hashing;
  * -------------------
  * - Stores key-value pairs, allowing null keys/values.
  * - Common Methods:
- *   - put(key, value)
- *   - get(key)
- *   - remove(key)
- *   - containsKey(key)
- *   - size()
- *   - keySet(), values()
+ *   - put(key, value)       // Inserts or updates a key-value pair in the map.
+ *   - get(key)              // Retrieves the value associated with the specified key.
+ *   - remove(key)           // Deletes the key-value pair from the map.
+ *   - containsKey(key)      // Checks if the map contains the specified key.
+ *   - size()                // Returns the number of key-value pairs in the map.
+ *   - keySet(), values()    // Returns a set of all keys or a collection of all values in the map.
  *
  * - Internals:
  *   - Uses an array of buckets.
