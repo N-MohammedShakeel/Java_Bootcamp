@@ -1,24 +1,27 @@
-package Java_Bootcamp.DSA.Basic.Searching;
+package Java_Bootcamp.DSA.Basic.Searching.BinarySearch;
 
-public class BinarySearch {
+public class LowerBound {
+
     public static void main(String[] args) {
-        // Problem: Find the index of element 25 in a sorted array
-        int[] arr = {11, 12, 22, 25, 34, 64, 90};
-        int target = 25;
+        // Problem: Given a sorted array of N integers and an integer x, write a program to find the lower bound of x.
+        int[] arr = {11, 12, 22, 24, 34, 64, 90};
+        int x = 25;
         System.out.println("Sorted Array: " + java.util.Arrays.toString(arr));
-        System.out.println("Target: " + target);
+        System.out.println("X: " + x);
 
-        // Solution: Implement Binary Search
-        int result = binarySearch(arr, target);
-        System.out.println("Result: " + (result == -1 ? "Element not found" : "Element found at index " + result));
+        // Solution: Implement Lower Bound using Binary Search
+        int result = binarySearch(arr, x);
+        System.out.println("Index " + result + " is the smallest index such that arr[" + result + "] >= x.");
     }
 
     // Binary Search: Repeatedly divide the search interval in half
     private static int binarySearch(int[] arr, int target) {
         int left = 0;
         int right = arr.length - 1;
+        int midn = 0;
         while (left <= right) {
             int mid = left + (right - left) / 2;
+            midn = mid;
             if (arr[mid] == target) {
                 return mid;
             }
@@ -28,6 +31,6 @@ public class BinarySearch {
                 right = mid - 1;
             }
         }
-        return -1; // Element not found
+        return midn;
     }
 }
