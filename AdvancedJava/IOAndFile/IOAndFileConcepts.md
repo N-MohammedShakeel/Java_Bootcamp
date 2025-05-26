@@ -1,5 +1,5 @@
 IO and File Operations in Java Explained
-=======================================
+==================================
 
 This document explains the Input/Output (IO) and File Operation concepts used in the provided Java programs, such as streams, BufferedReader, File, Path, Files, and other related terms. It’s written for beginners, assuming no prior knowledge, and uses simple analogies to clarify ideas.
 
