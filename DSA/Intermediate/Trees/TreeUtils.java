@@ -81,7 +81,7 @@ public class TreeUtils {
     }
 
     // Create a sample N-ary Tree
-    // Structure:       1
+    // Structure:      1
     //               / | \
     //              2  3  4
     //             /|     |
