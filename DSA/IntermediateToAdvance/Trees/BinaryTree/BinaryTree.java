@@ -1,8 +1,10 @@
 package Java_Bootcamp.DSA.IntermediateToAdvance.Trees.BinaryTree;
 
 // Binary Tree and Binary Search Tree Implementation
-// This file implements a Binary Tree and Binary Search Tree (BST) with key operations: insertion, search, deletion, traversals, and debugging.
-// Purpose: Provide a clear, readable, standalone implementation for HackWithInfy preparation, covering all binary tree concepts.
+
+// This file implements a Binary Tree and Binary Search Tree (BST) with key operations:
+// insertion, search, deletion, traversals, and debugging.
+
 // Workflow and algorithms are explained in comments for each operation, ensuring beginners can follow.
 // Tree creation is embedded in main method, with no external dependencies.
 // Key Features:
@@ -40,6 +42,7 @@ public class BinaryTree {
 
     // Binary Tree: Insert (Level-Order)
     // Workflow: Add node at the first empty left or right child, level by level, to maintain balance.
+
     // Algorithm:
     // 1. Create a new node.
     // 2. If tree is empty, set as root.
@@ -47,6 +50,7 @@ public class BinaryTree {
     // 4. Attach node to first empty left or right child.
     // Time Complexity: O(n) - may visit all n nodes.
     // Space Complexity: O(w) - queue holds max width w.
+
     public void insertBinary(int data) {
         Node newNode = new Node(data);
         if (root == null) {
@@ -345,7 +349,7 @@ public class BinaryTree {
         // Test Binary Tree
         System.out.println("Binary Tree Operations:");
         BinaryTree bt = new BinaryTree();
-        // Create Binary Tree:       1
+        // Create Binary Tree:      1
         //                         / \
         //                        2   3
         //                       / \ / \

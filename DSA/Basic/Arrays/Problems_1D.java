@@ -10,6 +10,7 @@ public class Problems_1D {
         getArray(arr);
 
 
+//        kaarQuestion(arr);
 //        longestSubArrayOfSumByTwoPointer(arr,3);
 //        longestSubArrayOfSumByHashMap(arr,3);
 //        longestSubArrayOfSum(arr,3);
@@ -56,8 +57,58 @@ public class Problems_1D {
 //        twoSum(arr,4);
 //        plusOne(arr);
 
-        printArray(arr);
+//        printArray(arr);
+
     }
+
+
+    static void kaarQuestion(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr[i] * arr[i];
+        }
+
+        // Step 3: Find binary representation and count set bits
+        int[] setBits = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            String binary = Integer.toBinaryString(arr[i]);
+            setBits[i] = countSetBits(arr[i]);
+            System.out.println("Decimal: " + arr[i] + " Binary: " + binary + " Set Bits: " + setBits[i]);
+        }
+
+        int maxBits = -1, minBits = Integer.MAX_VALUE;
+        int maxVal = -1, minVal = -1;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (setBits[i] > maxBits || (setBits[i] == maxBits && arr[i] < maxVal)) {
+                maxBits = setBits[i];
+                maxVal = arr[i];
+            }
+            if (setBits[i] < minBits || (setBits[i] == minBits && arr[i] < minVal)) {
+                minBits = setBits[i];
+                minVal = arr[i];
+            }
+        }
+
+        int product = maxVal * minVal;
+        System.out.println("Product: " + product);
+
+        int result = 1;
+        while (result < product) {
+            result *= 2;
+        }
+
+        System.out.println("Output (nearest power of 2): " + result);
+    }
+
+    static int countSetBits(int n) {
+        int count = 0;
+        while (n > 0) {
+            count += n & 1;
+            n >>= 1;
+        }
+        return count;
+    }
+
 
 
     static void longestSubArrayOfSumByTwoPointer(int[] arr, int targetSum) {
