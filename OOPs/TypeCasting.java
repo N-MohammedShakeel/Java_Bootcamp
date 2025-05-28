@@ -116,7 +116,7 @@ public class TypeCasting {
 
         // Example 5: Reference Type Casting - Downcasting
         System.out.println("\nReference Type Casting - Downcasting:");
-        if (animal instanceof Dog) {
+        if (animal instanceof Dog) { // To work correctly first we need to upcast then we need to downcast
             Dog downcastedDog = (Dog) animal; // Explicit downcasting: Animal to Dog
             downcastedDog.fetch(); // Golden Retriever dog is fetching a ball
         }

@@ -1,6 +1,9 @@
-package Java_Bootcamp.DSA.IntermediateToAdvance.Greedy;
+package Java_Bootcamp.DSA.IntermediateToAdvance.GreedyAlgorithm.Easy;
 
 import java.util.Arrays;
+
+// Problem Statement: Given two arrays representing children’s green factor and cookie sizes,
+// the goal is to maximise the number of content children.
 
 //https://leetcode.com/problems/assign-cookies/description/
 public class AssignCookies {

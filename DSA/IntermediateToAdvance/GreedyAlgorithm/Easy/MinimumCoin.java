@@ -1,7 +1,11 @@
-package Java_Bootcamp.DSA.IntermediateToAdvance.Greedy;
+package Java_Bootcamp.DSA.IntermediateToAdvance.GreedyAlgorithm.Easy;
 
 public class MinimumCoin {
 
+
+    // Problem Statement: Given a value V, if we want to make a change for V Rs, and we have an infinite supply of each of the denominations in Indian currency,\
+    // i.e., we have an infinite supply of { 1, 2, 5, 10, 20, 50, 100, 500, 1000} valued coins/notes,
+    // what is the minimum number of coins and/or notes needed to make the change.
     public static void main(String[] args) {
 
         int[] arr = {1000,500,200,100,50,20,10,5,2,1};
@@ -11,7 +15,6 @@ public class MinimumCoin {
         while (sum != 0){
 
             if(sum >= arr[index]){
-                System.out.println(arr[index]);
                 sum -= arr[index];
             }
 

@@ -1,4 +1,4 @@
-package Java_Bootcamp.DSA.IntermediateToAdvance.Greedy;
+package Java_Bootcamp.DSA.IntermediateToAdvance.GreedyAlgorithm.Easy;
 
 
 public class ValidParanthesis {
