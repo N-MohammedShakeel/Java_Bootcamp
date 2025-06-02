@@ -1,4 +1,4 @@
-package Java_Bootcamp.OOPs.Packages;
+package Java_Bootcamp.JavaBasics.Packages;
 
 // Class in com.example.models package (conceptually separate file)
 class Person {

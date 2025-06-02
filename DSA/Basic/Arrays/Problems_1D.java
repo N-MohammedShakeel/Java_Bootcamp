@@ -2,7 +2,8 @@ package Java_Bootcamp.DSA.Basic.Arrays;
 
 import java.util.*;
 
-public class Problems_1D {
+public class
+Problems_1D {
 
     public static void main(String[] args) {
 

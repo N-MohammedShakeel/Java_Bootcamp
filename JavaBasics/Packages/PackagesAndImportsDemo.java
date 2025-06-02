@@ -51,7 +51,7 @@
 
 // Note: For demonstration, assume this file is in package com.example.main
 // Other classes are assumed to be in com.example.utils and com.example.models
-package Java_Bootcamp.OOPs.Packages;
+package Java_Bootcamp.JavaBasics.Packages;
 
 // Static import
 import static java.lang.Math.PI;

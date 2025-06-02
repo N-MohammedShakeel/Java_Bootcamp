@@ -1,4 +1,4 @@
-package Java_Bootcamp.DSA.IntermediateToAdvance.GreedyAlgorithm.MediumToHard;
+package Java_Bootcamp.DSA.IntermediateToAdvance.GreedyAlgorithm.Medium;
 
 
 import java.util.*;

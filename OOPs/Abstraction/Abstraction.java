@@ -66,6 +66,7 @@ package Java_Bootcamp.OOPs.Abstraction;// Java Fundamentals: Abstraction
 
 public class Abstraction {
     public static void main(String[] args) {
+
         // Example 1: Abstract Class and Methods
         System.out.println("Abstract Class and Methods:");
         Bird sparrow = new Bird("Avian", "Sparrow");
