@@ -1,4 +1,4 @@
-package Java_Bootcamp.Collections.List_Interface;
+package Java_Bootcamp.DSA.IntermediateToAdvance.CustomImplementation;
 
 public class CustomArrayList<E> {
     private Object[] elements;
