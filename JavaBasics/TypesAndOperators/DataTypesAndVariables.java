@@ -1,4 +1,4 @@
-package Java_Bootcamp.JavaBasics;// Java Fundamentals: Data Types and Variables
+package Java_Bootcamp.JavaBasics.TypesAndOperators;// Java Fundamentals: Data Types and Variables
 // Aligned with Oracle Certified Professional: Java SE 17 Developer syllabus
 
 /*

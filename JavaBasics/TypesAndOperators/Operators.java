@@ -1,4 +1,4 @@
-package Java_Bootcamp.JavaBasics;// Java Fundamentals: Operators
+package Java_Bootcamp.JavaBasics.TypesAndOperators;// Java Fundamentals: Operators
 // Aligned with Oracle Certified Professional: Java SE 17 Developer syllabus
 
 /*
