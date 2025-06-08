@@ -25,7 +25,8 @@ class HashMapDemo {
         hashMap.put("Bob", 92);
         hashMap.put("Charlie", 88);
         hashMap.put("Alice", 90); // Updates value for existing key
-        hashMap.put(null, 100); // Null key allowed
+        hashMap.put(null, 200); // Null key allowed
+        hashMap.put(null, 100); // Existing null key will get updated
         hashMap.put("David", null); // Null value allowed
 
         // Print the map
