@@ -7,6 +7,7 @@ Problems_1D {
 
     public static void main(String[] args) {
 
+
         int[] arr = new int[5];
         getArray(arr);
 
@@ -57,11 +58,101 @@ Problems_1D {
 //        isSorted(arr);
 //        twoSum(arr,4);
 //        plusOne(arr);
+        romanToNumber();
 
 //        printArray(arr);
 
     }
 
+    static boolean patternCheck3(){
+
+        String pattern = "abbca";
+        String str = "dog cat cat fish cat";
+        String[] s = str.toLowerCase().split(" ");
+
+        if (pattern.length() != s.length)
+            return false;
+
+        String[] wordMatch = new String[26];
+
+        for (int i=0 ; i<pattern.length() ; i++){
+            int index = pattern.charAt(i) - 'a';
+
+            if (wordMatch[index] == null){
+                wordMatch[index] = s[i];
+            }else if(!wordMatch[index].equals(s[i]))
+                return false;
+        }
+        return true;
+    }
+
+    static boolean patternCheck2(){
+
+        String pattern = "abbcb";
+        String str = "dog cat cat fish dog";
+        String[] s = str.split(" ");
+
+        if (pattern.length() != s.length)
+            return false;
+
+        for (int i=0 ; i < s.length -1 ; i++){
+            if (pattern.charAt(i) == pattern.charAt(i+1)){
+                if (!s[i].equals(s[i+1]))
+                    return false;
+            }else if (pattern.charAt(i) != pattern.charAt(i+1)){
+                if (s[i].equals(s[i+1]))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    static void patternCheck1(){
+        HashMap<Character,String> map = new HashMap<>();
+
+        String pattern = "abba";
+        String str = "dog cat cat dog done";
+        String[] s = str.split(" ");
+
+
+        boolean ismatch = true;
+        for (int i=0 ; i < s.length ; i++){
+            if (!map.containsKey(pattern.charAt(i))){
+                map.put(pattern.charAt(i),s[i]);
+            }else if (map.containsKey(pattern.charAt(i))){
+                if (!map.get(pattern.charAt(i)).equals(s[i])){
+                    ismatch = false;
+                }
+            }
+        }
+
+        System.out.println(ismatch);
+    }
+
+    static void romanToNumber() {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        char[] ch = str.toCharArray();
+
+        String roman = "IVXLCDM";
+        int[] number = {1, 5, 10, 50, 100, 500, 1000};
+
+        int ans = 0;
+        for (int i = 0; i < ch.length; i++) {
+            int currentVal = number[roman.indexOf(ch[i])];
+            int nextVal = 0;
+            if (i + 1 < ch.length) {
+                nextVal = number[roman.indexOf(ch[i + 1])];
+            }
+            if (currentVal < nextVal) {
+                ans -= currentVal;
+            } else {
+                ans += currentVal;
+            }
+        }
+
+        System.out.println(ans);
+    }
 
     static void kaarQuestion(int[] arr){
         for (int i = 0; i < arr.length; i++) {

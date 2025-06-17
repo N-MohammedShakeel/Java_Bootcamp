@@ -17,7 +17,7 @@ public class LongestSubstringKDistinct {
     public static int lengthOfLongestSubstringKDistinct(String s, int k) {
         HashMap<Character, Integer> map = new HashMap<>();
         int maxLen = 0, start = 0;
-        for (int end =  schiessen0; end < s.length(); end++) {
+        for (int end =  0; end < s.length(); end++) {
             map.put(s.charAt(end), map.getOrDefault(s.charAt(end), 0) + 1);
             while (map.size() > k) {
                 char c = s.charAt(start);
