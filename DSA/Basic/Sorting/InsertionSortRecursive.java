@@ -45,7 +45,7 @@ public class InsertionSortRecursive {
         arr[j] = temp;
 
         // Recurse on previous element
-        insertionSortInner(arr, j - 1); // CORRECT
+        insertionSortInner(arr, j - 1);
     }
 
 

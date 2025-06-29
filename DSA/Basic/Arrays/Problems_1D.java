@@ -58,7 +58,10 @@ Problems_1D {
 //        isSorted(arr);
 //        twoSum(arr,4);
 //        plusOne(arr);
-        romanToNumber();
+//        romanToNumber();
+//        System.out.println(patternCheck1());
+//        System.out.println(patternCheck2());
+//        System.out.println(patternCheck3());
 
 //        printArray(arr);
 
@@ -107,7 +110,7 @@ Problems_1D {
         return true;
     }
 
-    static void patternCheck1(){
+    static boolean patternCheck1(){
         HashMap<Character,String> map = new HashMap<>();
 
         String pattern = "abba";
@@ -126,7 +129,7 @@ Problems_1D {
             }
         }
 
-        System.out.println(ismatch);
+        return ismatch;
     }
 
     static void romanToNumber() {

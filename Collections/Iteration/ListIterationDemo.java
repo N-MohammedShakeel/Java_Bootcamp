@@ -37,6 +37,7 @@ class ListIterationDemo {
         // - Use Case: When you need to traverse backward or modify elements at specific positions.
         System.out.println("\nUsing ListIterator (forward and backward):");
         ListIterator<String> listIterator = list.listIterator();
+
         System.out.println("Forward:");
         while (listIterator.hasNext()) {
             String item = listIterator.next();
@@ -69,6 +70,7 @@ class ListIterationDemo {
         // - Use Case: When you want to perform an action on each element in a functional style.
         System.out.println("\nUsing forEach with lambda:");
         list.forEach(item -> System.out.println(item));
+        list.forEach(System.out::println);
 
         // 5. Stream API
         // - Functional-style iteration with operations like filter, map, and collect.

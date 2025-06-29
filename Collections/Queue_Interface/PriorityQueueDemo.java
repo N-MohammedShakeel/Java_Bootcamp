@@ -55,4 +55,8 @@ class PriorityQueueDemo {
         System.out.println("Max PriorityQueue: " + maxPriorityQueue); // Output: [30, 10, 20] (heap order)
         System.out.println("Peek (max): " + maxPriorityQueue.peek()); // Output: 30
     }
+
+    public static void main(String[] args) {
+        PriorityQueueDemo.demonstrate();
+    }
 }
