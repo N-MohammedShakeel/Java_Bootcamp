@@ -1,8 +1,8 @@
-package Java_Bootcamp.DSA.Basic.Stack;
+package Java_Bootcamp.DSA.Basic.Stack.Problems;
 
 import java.util.Stack;
 
-public class Problems {
+public class evalRPN {
     public static void main(String[] args) {
 
         evalRPN();
