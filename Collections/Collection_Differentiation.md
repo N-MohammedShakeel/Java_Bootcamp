@@ -1,0 +1,375 @@
+# Java Collections Framework Implementations
+
+This document provides a detailed analysis of key implementation classes in the Java Collections Framework, covering their existence, location, internal implementation, constructors, data storage, and other characteristics relevant to Data Structures and Algorithms (DSA) preparation.
+
+## 1. ArrayList (List Interface)
+
+- **Exists Since**: Java 1.2 (introduced in Java Collections Framework).
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Dynamic array (resizable array). Elements are stored in a contiguous block of memory, resized when capacity is exceeded.
+- **Constructors**:
+  - `ArrayList()`: Creates an empty list with default initial capacity (10).
+  - `ArrayList(int initialCapacity)`: Creates an empty list with specified initial capacity.
+  - `ArrayList(Collection<? extends E> c)`: Creates a list containing elements of the specified collection.
+- **Data Storage**:
+  - **Structure**: Array of `Object` (`Object[] elementData`).
+  - **Attributes in Object**:
+    - `elementData`: Array to store elements.
+    - `size`: Number of elements in the list.
+    - No explicit `Node` structure (array-based, not node-based).
+- **Initial Capacity**: 10 (if no initial capacity specified).
+- **Load Factor**: Not applicable (array-based resizing, not hash-based).
+- **Resizing Factor**: When full, grows to 1.5x current capacity (approximately, using `newCapacity = oldCapacity + (oldCapacity >> 1)`).
+- **Homogeneous/Heterogeneous**: Supports both (generic type `E` ensures type safety, but non-generic `ArrayList` allows heterogeneous elements).
+- **Zero-Based Indexing**: Yes.
+- **Duplicates**: Allowed.
+- **Null Values**: Allowed.
+- **Insertion Order**: Preserved (elements maintain order of insertion).
+- **Methods Synchronized**: Not synchronized (use `Collections.synchronizedList` for thread safety).
+- **Type Safe**: Yes (since Java 1.5 with generics).
+- **Applications**:
+  - General-purpose list for dynamic arrays.
+  - Fast random access (O(1)) for indexing.
+  - Suitable for iteration-heavy operations (e.g., processing lists in algorithms).
+  - Used in scenarios requiring frequent get/set operations (e.g., data processing pipelines).
+
+## 2. LinkedList (List and Queue Interfaces)
+
+- **Exists Since**: Java 1.2.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Doubly-linked list. Each element is a node with references to the previous and next nodes.
+- **Constructors**:
+  - `LinkedList()`: Creates an empty list.
+  - `LinkedList(Collection<? extends E> c)`: Creates a list with elements from the specified collection.
+- **Data Storage**:
+  - **Structure**: Doubly-linked list with nodes.
+  - **Node Attributes**:
+    - `E item`: The element stored.
+    - `Node<E> next`: Reference to the next node.
+    - `Node<E> prev`: Reference to the previous node.
+  - **Attributes in Object**:
+    - `Node<E> first`: Reference to the first node.
+    - `Node<E> last`: Reference to the last node.
+    - `size`: Number of elements.
+- **Initial Capacity**: Not applicable (dynamic, node-based).
+- **Load Factor**: Not applicable.
+- **Resizing Factor**: Not applicable (grows dynamically with node allocation).
+- **Homogeneous/Heterogeneous**: Supports both (generic type `E` ensures type safety, non-generic allows heterogeneous).
+- **Zero-Based Indexing**: Yes (for `List` operations).
+- **Duplicates**: Allowed.
+- **Null Values**: Allowed.
+- **Insertion Order**: Preserved.
+- **Methods Synchronized**: Not synchronized (use `Collections.synchronizedList` for thread safety).
+- **Type Safe**: Yes (since Java 1.5 with generics).
+- **Applications**:
+  - Efficient for frequent insertions/deletions (O(1) at ends, O(n) for indexed access).
+  - Implements `Deque` for stack/queue operations (e.g., BFS, DFS).
+  - Used in scenarios requiring list manipulation with dynamic size (e.g., task scheduling).
+
+## 3. Vector (List Interface)
+
+- **Exists Since**: Java 1.0 (legacy, updated in Java 1.2 for Collections Framework).
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Dynamic array, similar to `ArrayList`, but synchronized.
+- **Constructors**:
+  - `Vector()`: Creates an empty vector with default initial capacity (10).
+  - `Vector(int initialCapacity)`: Creates an empty vector with specified initial capacity.
+  - `Vector(int initialCapacity, int capacityIncrement)`: Creates an empty vector with specified capacity and increment for resizing.
+  - `Vector(Collection<? extends E> c)`: Creates a vector with elements from the specified collection.
+- **Data Storage**:
+  - **Structure**: Array of `Object` (`Object[] elementData`).
+  - **Attributes in Object**:
+    - `elementData`: Array to store elements.
+    - `elementCount`: Number of elements.
+    - `capacityIncrement`: Increment size for resizing (0 means double capacity).
+  - No `Node` structure.
+- **Initial Capacity**: 10.
+- **Load Factor**: Not applicable.
+- **Resizing Factor**: Doubles capacity if `capacityIncrement` is 0; otherwise, increases by `capacityIncrement`.
+- **Homogeneous/Heterogeneous**: Supports both (generic since Java 1.5).
+- **Zero-Based Indexing**: Yes.
+- **Duplicates**: Allowed.
+- **Null Values**: Allowed.
+- **Insertion Order**: Preserved.
+- **Methods Synchronized**: Yes (thread-safe by default).
+- **Type Safe**: Yes (since Java 1.5 with generics).
+- **Applications**:
+  - Legacy applications requiring thread-safe lists.
+  - Scenarios needing synchronized dynamic arrays (e.g., multi-threaded environments).
+  - Less common today due to `ArrayList` with `Collections.synchronizedList`.
+
+## 4. HashSet (Set Interface)
+
+- **Exists Since**: Java 1.2.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Backed by a `HashMap` instance (elements as keys, dummy object as values).
+- **Constructors**:
+  - `HashSet()`: Creates an empty set with default initial capacity (16) and load factor (0.75).
+  - `HashSet(int initialCapacity)`: Creates an empty set with specified initial capacity.
+  - `HashSet(int initialCapacity, float loadFactor)`: Creates an empty set with specified capacity and load factor.
+  - `HashSet(Collection<? extends E> c)`: Creates a set with elements from the specified collection.
+- **Data Storage**:
+  - **Structure**: `HashMap<E, Object>` internally, with elements as keys and a static `Object` (`PRESENT`) as value.
+  - **Attributes in Object**:
+    - `map`: The underlying `HashMap`.
+  - **Node Attributes** (in `HashMap`):
+    - `int hash`: Hash code of the key.
+    - `E key`: The element (set’s value).
+    - `Object value`: Dummy object (`PRESENT`).
+    - `Node<K,V> next`: Reference to next node (for collision handling).
+- **Initial Capacity**: 16.
+- **Load Factor**: 0.75 (resizes when 75% full).
+- **Resizing Factor**: Doubles capacity (2x).
+- **Homogeneous/Heterogeneous**: Supports both (generic type `E`).
+- **Zero-Based Indexing**: No (unordered collection).
+- **Duplicates**: Not allowed.
+- **Null Values**: Allowed (one null element).
+- **Insertion Order**: Not preserved (unordered due to hashing).
+- **Methods Synchronized**: Not synchronized (use `Collections.synchronizedSet`).
+- **Type Safe**: Yes (since Java 1.5).
+- **Applications**:
+  - Fast lookup, insertion, and deletion (O(1) average case).
+  - Removing duplicates from a collection.
+  - Membership testing (e.g., checking if an element exists in a dataset).
+
+## 5. LinkedHashSet (Set Interface)
+
+- **Exists Since**: Java 1.4.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Backed by a `LinkedHashMap`, maintaining a doubly-linked list for insertion order.
+- **Constructors**:
+  - `LinkedHashSet()`: Creates an empty set with default initial capacity (16) and load factor (0.75).
+  - `LinkedHashSet(int initialCapacity)`: Creates an empty set with specified initial capacity.
+  - `LinkedHashSet(int initialCapacity, float loadFactor)`: Creates an empty set with specified capacity and load factor.
+  - `LinkedHashSet(Collection<? extends E> c)`: Creates a set with elements from the specified collection.
+- **Data Storage**:
+  - **Structure**: `LinkedHashMap<E, Object>` with elements as keys and dummy object as values.
+  - **Attributes in Object**:
+    - `map`: The underlying `LinkedHashMap`.
+  - **Node Attributes** (in `LinkedHashMap`):
+    - `int hash`: Hash code of the key.
+    - `E key`: The element.
+    - `Object value`: Dummy object.
+    - `Node<K,V> next`: Next node for collisions.
+    - `Entry<K,V> before, after`: Links for maintaining insertion order.
+- **Initial Capacity**: 16.
+- **Load Factor**: 0.75.
+- **Resizing Factor**: Doubles capacity (2x).
+- **Homogeneous/Heterogeneous**: Supports both (generic type `E`).
+- **Zero-Based Indexing**: No.
+- **Duplicates**: Not allowed.
+- **Null Values**: Allowed (one null).
+- **Insertion Order**: Preserved (via linked list).
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes (since Java 1.5).
+- **Applications**:
+  - Maintaining unique elements with insertion order (e.g., unique event logs).
+  - Scenarios requiring predictable iteration order with set semantics.
+
+## 6. TreeSet (Set and SortedSet Interfaces)
+
+- **Exists Since**: Java 1.2.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Backed by a `TreeMap` (red-black tree), maintaining elements in sorted order.
+- **Constructors**:
+  - `TreeSet()`: Creates an empty set with natural ordering.
+  - `TreeSet(Comparator<? super E> comparator)`: Creates an empty set with custom comparator.
+  - `TreeSet(Collection<? extends E> c)`: Creates a set with elements from the specified collection.
+  - `TreeSet(SortedSet<E> s)`: Creates a set with elements from the specified sorted set.
+- **Data Storage**:
+  - **Structure**: `TreeMap<E, Object>` with elements as keys and dummy object as values.
+  - **Attributes in Object**:
+    - `map`: The underlying `TreeMap`.
+  - **Node Attributes** (in `TreeMap`):
+    - `E key`: The element.
+    - `Object value`: Dummy object.
+    - `Entry<K,V> left, right`: Left and right child nodes.
+    - `Entry<K,V> parent`: Parent node.
+    - `boolean color`: Red or black (for red-black tree balancing).
+- **Initial Capacity**: Not applicable (tree-based, grows dynamically).
+- **Load Factor**: Not applicable.
+- **Resizing Factor**: Not applicable (tree-based).
+- **Homogeneous/Heterogeneous**: Homogeneous (requires comparable elements or custom comparator).
+- **Zero-Based Indexing**: No.
+- **Duplicates**: Not allowed.
+- **Null Values**: Not allowed (since Java 1.7, due to `Comparable`/`Comparator` requirements).
+- **Insertion Order**: Not preserved (sorted order, natural or custom).
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes.
+- **Applications**:
+  - Maintaining sorted unique elements (e.g., sorted dictionary).
+  - Range queries (e.g., finding elements within a range).
+  - Ordered set operations in algorithms.
+
+## 7. PriorityQueue (Queue Interface)
+
+- **Exists Since**: Java 1.5.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Binary heap (min-heap by default) implemented as a balanced binary tree in an array.
+- **Constructors**:
+  - `PriorityQueue()`: Creates an empty queue with default initial capacity (11) and natural ordering.
+  - `PriorityQueue(int initialCapacity)`: Creates an empty queue with specified initial capacity.
+  - `PriorityQueue(Comparator<? super E> comparator)`: Creates an empty queue with custom comparator.
+  - `PriorityQueue(int initialCapacity, Comparator<? super E> comparator)`: Creates an empty queue with specified capacity and comparator.
+  - `PriorityQueue(Collection<? extends E> c)`: Creates a queue with elements from the specified collection.
+  - `PriorityQueue(PriorityQueue<? extends E> c)`: Creates a queue with elements from another priority queue.
+  - `PriorityQueue(SortedSet<? extends E> c)`: Creates a queue with elements from a sorted set.
+- **Data Storage**:
+  - **Structure**: Array (`Object[] queue`) representing a binary heap.
+  - **Attributes in Object**:
+    - `queue`: Array to store heap elements.
+    - `size`: Number of elements.
+    - `comparator`: Custom comparator (null for natural ordering).
+  - No explicit `Node` structure.
+- **Initial Capacity**: 11.
+- **Load Factor**: Not applicable.
+- **Resizing Factor**: Doubles capacity when full.
+- **Homogeneous/Heterogeneous**: Homogeneous (requires comparable elements or custom comparator).
+- **Zero-Based Indexing**: No (heap-based, not indexed).
+- **Duplicates**: Allowed.
+- **Null Values**: Not allowed (due to `Comparable`/`Comparator`).
+- **Insertion Order**: Not preserved (heap order, based on priority).
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes.
+- **Applications**:
+  - Priority-based task scheduling (e.g., job queues).
+  - Dijkstra’s algorithm, Huffman coding (heap-based algorithms).
+  - Event-driven simulations.
+
+## 8. ArrayDeque (Queue and Deque Interfaces)
+
+- **Exists Since**: Java 1.6.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Circular array, supporting efficient operations at both ends (double-ended queue).
+- **Constructors**:
+  - `ArrayDeque()`: Creates an empty deque with default initial capacity (16).
+  - `ArrayDeque(int initialCapacity)`: Creates an empty deque with specified initial capacity.
+  - `ArrayDeque(Collection<? extends E> c)`: Creates a deque with elements from the specified collection.
+- **Data Storage**:
+  - **Structure**: Circular array (`Object[] elements`).
+  - **Attributes in Object**:
+    - `elements`: Array to store elements.
+    - `head`: Index of the first element.
+    - `tail`: Index of the next free slot.
+  - No `Node` structure.
+- **Initial Capacity**: 16 (rounded up to nearest power of 2).
+- **Load Factor**: Not applicable.
+- **Resizing Factor**: Doubles capacity when full.
+- **Homogeneous/Heterogeneous**: Supports both (generic type `E`).
+- **Zero-Based Indexing**: No (circular buffer, not directly indexed).
+- **Duplicates**: Allowed.
+- **Null Values**: Not allowed (throws `NullPointerException`).
+- **Insertion Order**: Preserved.
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes.
+- **Applications**:
+  - Efficient stack or queue operations (O(1) at both ends).
+  - Sliding window problems (e.g., maintaining a deque of indices).
+  - Double-ended queue operations in algorithms.
+
+## 9. HashMap (Map Interface)
+
+- **Exists Since**: Java 1.2.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Hash table with chaining (linked lists or red-black trees for collisions since Java 8).
+- **Constructors**:
+  - `HashMap()`: Creates an empty map with default initial capacity (16) and load factor (0.75).
+  - `HashMap(int initialCapacity)`: Creates an empty map with specified initial capacity.
+  - `HashMap(int initialCapacity, float loadFactor)`: Creates an empty map with specified capacity and load factor.
+  - `HashMap(Map<? extends K, ? extends V> m)`: Creates a map with elements from the specified map.
+- **Data Storage**:
+  - **Structure**: Array of buckets (`Node<K,V>[] table`) with linked lists or trees for collisions.
+  - **Node Attributes**:
+    - `int hash`: Hash code of the key.
+    - `K key`: The key.
+    - `V value`: The value.
+    - `Node<K,V> next`: Next node in the bucket (for collisions).
+  - **Attributes in Object**:
+    - `table`: Array of nodes.
+    - `size`: Number of key-value pairs.
+    - `threshold`: Resize threshold (`capacity * loadFactor`).
+    - `loadFactor`: Load factor for resizing.
+- **Initial Capacity**: 16.
+- **Load Factor**: 0.75.
+- **Resizing Factor**: Doubles capacity (2x).
+- **Homogeneous/Heterogeneous**: Supports both (generic types `K`, `V`).
+- **Zero-Based Indexing**: No.
+- **Duplicates**: Keys: Not allowed; Values: Allowed.
+- **Null Values**: One null key allowed, multiple null values allowed.
+- **Insertion Order**: Not preserved.
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes.
+- **Applications**:
+  - Fast key-value lookups (O(1) average case).
+  - Caching, frequency counting, and mapping relationships.
+  - Hash-based algorithms (e.g., grouping elements).
+
+## 10. LinkedHashMap (Map Interface)
+
+- **Exists Since**: Java 1.4.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Hash table with a doubly-linked list to maintain insertion or access order.
+- **Constructors**:
+  - `LinkedHashMap()`: Creates an empty map with default initial capacity (16) and load factor (0.75).
+  - `LinkedHashMap(int initialCapacity)`: Creates an empty map with specified initial capacity.
+  - `LinkedHashMap(int initialCapacity, float loadFactor)`: Creates an empty map with specified capacity and load factor.
+  - `LinkedHashMap(Map<? extends K, ? extends V> m)`: Creates a map with elements from the specified map.
+  - `LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)`: Creates a map with specified capacity, load factor, and order (insertion or access).
+- **Data Storage**:
+  - **Structure**: `LinkedHashMap` extends `HashMap` with a doubly-linked list.
+  - **Node Attributes**:
+    - `int hash`, `K key`, `V value`, `Node<K,V> next`: Same as `HashMap`.
+    - `Entry<K,V> before, after`: Links for maintaining order.
+  - **Attributes in Object**:
+    - `head`, `tail`: Head and tail of the linked list.
+    - `accessOrder`: Boolean for insertion (false) or access (true) order.
+- **Initial Capacity**: 16.
+- **Load Factor**: 0.75.
+- **Resizing Factor**: Doubles capacity.
+- **Homogeneous/Heterogeneous**: Supports both.
+- **Zero-Based Indexing**: No.
+- **Duplicates**: Keys: Not allowed; Values: Allowed.
+- **Null Values**: One null key, multiple null values.
+- **Insertion Order**: Preserved (or access order if specified).
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes.
+- **Applications**:
+  - LRU (Least Recently Used) cache (with access order).
+  - Maintaining key-value pairs with predictable iteration order.
+
+## 11. TreeMap (Map and SortedMap Interfaces)
+
+- **Exists Since**: Java 1.2.
+- **Where Present**: `java.util` package.
+- **Internal Implementation**: Red-black tree, maintaining keys in sorted order.
+- **Constructors**:
+  - `TreeMap()`: Creates an empty map with natural ordering.
+  - `TreeMap(Comparator<? super K> comparator)`: Creates an empty map with custom comparator.
+  - `TreeMap(Map<? extends K, ? extends V> m)`: Creates a map with elements from the specified map.
+  - `TreeMap(SortedMap<K, ? extends V> m)`: Creates a map with elements from the specified sorted map.
+- **Data Storage**:
+  - **Structure**: Red-black tree.
+  - **Node Attributes**:
+    - `K key`: The key.
+    - `V value`: The value.
+    - `Entry<K,V> left, right`: Child nodes.
+    - `Entry<K,V> parent`: Parent node.
+    - `boolean color`: Red or black for balancing.
+  - **Attributes in Object**:
+    - `root`: Root node of the tree.
+    - `size`: Number of key-value pairs.
+    - `comparator`: Custom comparator (null for natural ordering).
+- **Initial Capacity**: Not applicable.
+- **Load Factor**: Not applicable.
+- **Resizing Factor**: Not applicable (tree-based).
+- **Homogeneous/Heterogeneous**: Homogeneous (keys require `Comparable` or comparator).
+- **Zero-Based Indexing**: No.
+- **Duplicates**: Keys: Not allowed; Values: Allowed.
+- **Null Values**: Null keys not allowed (since Java 1.7); null values allowed.
+- **Insertion Order**: Not preserved (sorted by keys).
+- **Methods Synchronized**: Not synchronized.
+- **Type Safe**: Yes.
+- **Applications**:
+  - Sorted key-value mappings (e.g., dictionary applications).
+  - Range queries on keys.
+  - Ordered data storage in algorithms.

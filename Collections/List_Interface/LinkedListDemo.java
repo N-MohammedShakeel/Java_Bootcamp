@@ -1,10 +1,6 @@
 package Java_Bootcamp.Collections.List_Interface;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class LinkedListDemo {

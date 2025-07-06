@@ -21,7 +21,8 @@ The **Java Collections Framework** is a set of classes and interfaces in the `ja
 - **Thread Safety**: Most collections are not thread-safe by default; use `Collections.synchronized*` or concurrent classes for multithreading.
 - **Performance**: Varies by implementation (e.g., `ArrayList` vs. `LinkedList`, `HashMap` vs. `TreeMap`).
 
-![java-collection-framework-hierarchy.jpg](Assets/java-collection-framework-hierarchy.jpg)
+![java-collection-framework-hierarchy.jpg](Assets/img.png)
+![java-collection-framework-hierarchy.jpg](Assets/img_1.png)
 
 ## 3. Collection Hierarchy
 ### 3.1 Core Interfaces

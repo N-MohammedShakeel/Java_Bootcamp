@@ -119,5 +119,6 @@ public class LambdaExpressions {
             .filter(n -> n % 2 == 0) // Predicate
             .map(n -> n * 2) // Function
             .forEach(n -> System.out.print(n + " ")); // Consumer
+
     }
 }
