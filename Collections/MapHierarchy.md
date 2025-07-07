@@ -64,7 +64,7 @@ The primary `Map` implementations are:
 - **LinkedHashMap**: Extends `HashMap`, maintains insertion or access order.
 - **TreeMap**: Red-black tree-based, maintains sorted key order (O(log n) operations).
 - **ConcurrentHashMap**: Thread-safe hash table (not covered in detail here).
-- **Hashtable**: Legacy synchronized hash table (not covered).
+- **Hashtable**: Legacy synchronized hash table (covered at the end).
 
 Below, each implementation is described with its role in the hierarchy and a simplified internal implementation to demonstrate core functionality.
 

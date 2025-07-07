@@ -16,9 +16,8 @@ This document provides a detailed analysis of key implementation classes in the 
   - **Attributes in Object**:
     - `elementData`: Array to store elements.
     - `size`: Number of elements in the list.
-    - No explicit `Node` structure (array-based, not node-based).
 - **Initial Capacity**: 10 (if no initial capacity specified).
-- **Load Factor**: Not applicable (array-based resizing, not hash-based).
+- **Load Factor**: It resizes when 100% filled
 - **Resizing Factor**: When full, grows to 1.5x current capacity (approximately, using `newCapacity = oldCapacity + (oldCapacity >> 1)`).
 - **Homogeneous/Heterogeneous**: Supports both (generic type `E` ensures type safety, but non-generic `ArrayList` allows heterogeneous elements).
 - **Zero-Based Indexing**: Yes.
@@ -33,7 +32,7 @@ This document provides a detailed analysis of key implementation classes in the 
   - Suitable for iteration-heavy operations (e.g., processing lists in algorithms).
   - Used in scenarios requiring frequent get/set operations (e.g., data processing pipelines).
 
-## 2. LinkedList (List and Queue Interfaces)
+## 2. LinkedList (List, Queue and Dequeue Interfaces)
 
 - **Exists Since**: Java 1.2.
 - **Where Present**: `java.util` package.
