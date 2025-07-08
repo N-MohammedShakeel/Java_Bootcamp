@@ -36,8 +36,8 @@ Lambda Expressions Overview
   - Type inference reduces verbosity (parameter types often optional).
   - Method references (e.g., Class::method) can sometimes replace lambdas for brevity.
 
-2. Functional Interfaces (Predicate, Function, Consumer, Supplier)
-----------------------------------------------------------------
+2. Functional Interfaces (Predicate, Function, BiFunction, Consumer, Supplier)
+---------------------------------------------------------------------------
 - Functional Interface:
   - An interface with exactly one abstract method (SAM), annotated with @FunctionalInterface for validation.
   - Examples in java.util.function package:
@@ -47,10 +47,13 @@ Lambda Expressions Overview
     b. Function<T, R>: Transforms input to output.
       - Abstract method: R apply(T t)
       - Example: Function<String, Integer> length = s -> s.length();
-    c. Consumer<T>: Performs an action on input, no return.
+    c. BiFunction<T, U, R>: Takes two inputs and returns an output.
+      - Abstract method: R apply(T t, U u)
+      - Example: BiFunction<Integer, Integer, Integer> sum = (a, b) -> a + b;
+    d. Consumer<T>: Performs an action on input, no return.
       - Abstract method: void accept(T t)
       - Example: Consumer<String> print = s -> System.out.println(s);
-    d. Supplier<T>: Produces a value, takes no input.
+    e. Supplier<T>: Produces a value, takes no input.
       - Abstract method: T get()
       - Example: Supplier<Double> random = () -> Math.random();
 - Notes:
@@ -61,6 +64,7 @@ Lambda Expressions Overview
 
 import java.util.function.Predicate;
 import java.util.function.Function;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.Arrays;
@@ -70,12 +74,15 @@ public class LambdaExpressions {
     public static void main(String[] args) {
         // Example 1: Basic Lambda Syntax
         System.out.println("Example 1: Basic Lambda Syntax");
+
         // Lambda with no parameters
         Runnable noParams = () -> System.out.println("Hello from lambda!");
         noParams.run();
+
         // Lambda with single parameter
         Function<Integer, Integer> square = x -> x * x;
         System.out.println("Square of 5: " + square.apply(5)); // 25
+
         // Lambda with multiple parameters
         java.util.Comparator<Integer> compare = (a, b) -> a - b;
         System.out.println("Compare 10, 5: " + compare.compare(10, 5)); // 1
@@ -85,9 +92,12 @@ public class LambdaExpressions {
         Predicate<Integer> isPositive = n -> n > 0;
         System.out.println("Is 10 positive? " + isPositive.test(10)); // true
         System.out.println("Is -5 positive? " + isPositive.test(-5)); // false
+
         List<Integer> numbers = Arrays.asList(-2, -1, 0, 1, 2);
         System.out.print("Positive numbers: ");
-        numbers.stream().filter(isPositive).forEach(n -> System.out.print(n + " ")); // 1 2
+        numbers.stream()
+                .filter(isPositive)
+                .forEach(n -> System.out.print(n + " ")); // 1 2
 
         // Example 3: Function Functional Interface
         System.out.println("\n\nExample 3: Function");
@@ -96,29 +106,35 @@ public class LambdaExpressions {
         Function<Integer, String> toBinary = n -> Integer.toBinaryString(n);
         System.out.println("Binary of 10: " + toBinary.apply(10)); // 1010
 
-        // Example 4: Consumer Functional Interface
-        System.out.println("\nExample 4: Consumer");
+        // Example 4: BiFunction Functional Interface
+        System.out.println("\nExample 4: BiFunction");
+        BiFunction<Integer, Integer, Integer> sum = (a, b) -> a + b;
+        System.out.println("Sum of 3 and 5: " + sum.apply(3, 5)); // 8
+        BiFunction<String, String, String> concat = (s1, s2) -> s1 + " " + s2;
+        System.out.println("Concatenate 'Hello' and 'World': " + concat.apply("Hello", "World")); // Hello World
+
+        // Example 5: Consumer Functional Interface
+        System.out.println("\nExample 5: Consumer");
         Consumer<String> printer = s -> System.out.println("Message: " + s);
         printer.accept("Hello, Lambda!"); // Message: Hello, Lambda!
         List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
         System.out.print("Names: ");
         names.forEach(printer); // Message: Alice Message: Bob Message: Charlie
 
-        // Example 5: Supplier Functional Interface
-        System.out.println("\nExample 5: Supplier");
-        Supplier<Double> randomValue = () -> Math.random();
+        // Example 6: Supplier Functional Interface
+        System.out.println("\nExample 6: Supplier");
+        Supplier<Double> randomValue = Math::random;  // () -> Math.random();
         System.out.println("Random value: " + randomValue.get());
         Supplier<String> defaultName = () -> "Unknown";
         System.out.println("Default name: " + defaultName.get()); // Unknown
 
-        // Example 6: Lambda with Streams
-        System.out.println("\nExample 6: Lambda with Streams");
+        // Example 7: Lambda with Streams
+        System.out.println("\nExample 7: Lambda with Streams");
         List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);
         System.out.print("Doubled even numbers: ");
         nums.stream()
-            .filter(n -> n % 2 == 0) // Predicate
-            .map(n -> n * 2) // Function
-            .forEach(n -> System.out.print(n + " ")); // Consumer
-
+                .filter(n -> n % 2 == 0) // Predicate
+                .map(n -> n * 2) // Function
+                .forEach(n -> System.out.print(n + " ")); // Consumer
     }
 }

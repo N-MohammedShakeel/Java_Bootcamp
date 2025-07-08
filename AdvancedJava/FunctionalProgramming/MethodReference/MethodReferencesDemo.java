@@ -45,7 +45,7 @@ public class MethodReferencesDemo {
         List<String> numberStrings = Arrays.asList("1", "2", "3");
         List<Integer> numbers = numberStrings.stream()
                                              .map(Integer::parseInt)
-                                             .collect(Collectors.toList());
+                                             .toList(); // .collect(Collectors.toList());
         System.out.println("Parsed numbers: " + numbers); // [1, 2, 3]
 
         // Example 2: Instance Method Reference (Specific Object)
@@ -61,7 +61,7 @@ public class MethodReferencesDemo {
         System.out.println("Uppercase 'java': " + toUpper.apply("java")); // JAVA
         List<String> upperWords = words.stream()
                                        .map(String::toUpperCase)
-                                       .collect(Collectors.toList());
+                                       .toList();
         System.out.println("Uppercase words: " + upperWords); // [APPLE, BANANA, CHERRY]
 
         // Example 4: Constructor Reference
@@ -70,8 +70,8 @@ public class MethodReferencesDemo {
         String newString = stringCreator.get();
         System.out.println("New string (empty): '" + newString + "'"); // ''
         List<String> copiedWords = words.stream()
-                                        .map(s -> new String(s)) // Lambda equivalent
-                                        .collect(Collectors.toList());
+                                        .map(String::new) // Method Ref  // .map(s -> new String(s)) // Lambda equivalent
+                                        .toList();
         System.out.println("Copied words: " + copiedWords); // [apple, banana, cherry]
 
         // Example 5: Combining Method References in Streams
@@ -80,7 +80,7 @@ public class MethodReferencesDemo {
                                         .filter(String::isEmpty) // No empty strings in this case
                                         .map(String::toUpperCase)
                                         .sorted(String::compareTo)
-                                        .collect(Collectors.toList());
+                                        .toList();
         System.out.println("Filtered, uppercased, sorted (empty filter): " + sortedWords); // []
 
         // Example 6: Custom Instance Method Reference
