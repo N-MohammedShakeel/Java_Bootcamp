@@ -78,6 +78,7 @@ Streams API Overview
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -146,7 +147,7 @@ public class StreamsAPI {
                                   .filter(s -> s.length() > 4) // Words longer than 4 chars
                                   .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1)) // Capitalize first letter
                                   .sorted() // Sort alphabetically
-                                  .collect(Collectors.toList());
+                                  .toList();
         System.out.println("Capitalized words (length > 4): " + result);
     }
 }

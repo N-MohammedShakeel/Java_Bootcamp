@@ -207,3 +207,39 @@ MAANG interviews emphasize problem-solving, time/space complexity optimization, 
 - **Optimization**: Focus on time/space complexity analysis and writing clean, bug-free code.
 
 This syllabus covers the 20 essential DSA patterns for MAANG interviews. Practice consistently, prioritize problem-solving over rote memorization, and ensure familiarity with edge cases and optimizations.
+
+
+## Best DSA resource 
+- [resource github](https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file/)
+
+## 📚 LeetCode Topic-Wise Discussion Links
+
+### 🟢 Two Pointers
+- [Solved all Two Pointers problems in 100+](https://leetcode.com/discuss/post/1688903/solved-all-two-pointers-problems-in-100-z56cn/)
+
+### 🔍 Binary Search
+- [Binary Search for Beginners + Problems](https://leetcode.com/discuss/post/691825/binary-search-for-beginners-problems-pat-0hei/)
+
+### 🪟 Sliding Window
+- [Sliding Window Technique and Questions](https://leetcode.com/discuss/post/1773891/sliding-window-technique-and-question-ba-9tt4/)
+
+### 🔗 Linked List
+- [Become Master in Linked List by Hi Malik](https://leetcode.com/discuss/post/1800120/become-master-in-linked-list-by-hi-malik-qvdr/)
+
+### 🌳 Trees
+- [Master Tree Patterns by mercer80](https://leetcode.com/discuss/post/5020529/master-tree-patterns-by-mercer80-8b0z/)
+
+### 🟡 Greedy
+- [Greedy for Beginners + Problems & Sample Solutions](https://leetcode.com/discuss/post/669996/greedy-for-beginners-problems-sample-sol-rf7c/)
+
+### 🔁 Dynamic Programming
+- [DP for Beginners + Problems, Patterns, Samples](https://leetcode.com/discuss/post/662866/dp-for-beginners-problems-patterns-sampl-atdb/)
+
+### 🕸️ Graph
+- [Graph for Beginners + Problems & Patterns](https://leetcode.com/discuss/post/655708/graph-for-beginners-problems-pattern-sam-06fb/)
+
+### 📐 Monotonic Stack
+- [A Comprehensive Guide and Template for Monotonic Stack](https://leetcode.com/discuss/post/2347639/a-comprehensive-guide-and-template-for-m-irii/)
+
+### 🧠 Bit Manipulation
+- [All Types of Patterns for Bits Manipulation](https://leetcode.com/discuss/post/3695233/all-types-of-patterns-for-bits-manipulat-qezp/)
