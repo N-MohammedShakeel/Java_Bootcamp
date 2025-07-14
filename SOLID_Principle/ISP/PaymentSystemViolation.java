@@ -1,4 +1,6 @@
-package Java_Bootcamp.SOLID_Principle.ISP;// PaymentSystemViolation.java
+package Java_Bootcamp.SOLID_Principle.ISP;
+
+// PaymentSystemViolation.java
 // Demonstrates a violation of the Interface Segregation Principle (ISP)
 // Clients are forced to implement unused methods
 
