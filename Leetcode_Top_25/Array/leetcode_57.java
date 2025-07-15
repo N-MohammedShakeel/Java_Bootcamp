@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 //https://leetcode.com/problems/insert-interval/description/
-public class Problem_57 {
+public class leetcode_57 {
     public static void main(String[] args) {
 
         int[][] arr1 = {{1,2},{3,5},{6,7},{8,10},{12,16}};

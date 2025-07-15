@@ -1,9 +1,8 @@
 package Java_Bootcamp.Leetcode_Top_25.Array;
 
 import java.util.HashMap;
-import java.util.List;
 
-public class Problem_15 {
+public class leetcode_15 {
 
     public static void main(String[] args) {
 

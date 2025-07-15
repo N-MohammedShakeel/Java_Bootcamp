@@ -1,6 +1,6 @@
 package Java_Bootcamp.DSA_Patterns.Prefix_Sum;
 
-public class leetcode303 {
+public class leetcode_303 {
 
     class NumArray {
         private int[] prefixSum;
