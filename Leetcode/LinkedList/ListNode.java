@@ -1,8 +1,8 @@
-package Java_Bootcamp.DSA_Patterns.ReverseLL;
+package Java_Bootcamp.Leetcode.LinkedList;
 
 public class ListNode {
     int val;
-    ListNode next;
+    public ListNode next;
 
     ListNode() {
     }

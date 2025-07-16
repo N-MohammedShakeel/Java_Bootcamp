@@ -1,4 +1,4 @@
-package Java_Bootcamp.Leetcode_Top_25.Array;
+package Java_Bootcamp.Leetcode.Leetcode_Top_25.Array;
 
 import java.util.ArrayList;
 import java.util.Arrays;

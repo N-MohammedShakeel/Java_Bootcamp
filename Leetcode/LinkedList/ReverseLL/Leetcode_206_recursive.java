@@ -1,4 +1,6 @@
-package Java_Bootcamp.DSA_Patterns.ReverseLL;
+package Java_Bootcamp.Leetcode.LinkedList.ReverseLL;
+
+import Java_Bootcamp.Leetcode.LinkedList.ListNode;
 
 class Leetcode_206_recursive {
 
