@@ -1,7 +1,7 @@
 package Java_Bootcamp.Leetcode.LinkedList;
 
 public class ListNode {
-    int val;
+    public int val;
     public ListNode next;
 
     ListNode() {
