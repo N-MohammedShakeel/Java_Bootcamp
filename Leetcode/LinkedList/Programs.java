@@ -48,30 +48,6 @@ public class Programs {
         return 0;
     }
 
-    static int findLength(ListNode slow, ListNode fast){
-
-        // count to keep track of
-        // nodes encountered in loop
-        int cnt = 1;
-
-        // move fast by one step
-        fast = fast.next;
-
-        // traverse fast till it
-        // reaches back to slow
-        while(slow!=fast){
-
-            // at each node increase
-            // count by 1 and move fast
-            // forward by one step
-            cnt++;
-            fast = fast.next;
-        }
-
-        // loop terminates when fast reaches
-        // slow again and the count is returned
-        return cnt;
-    }
 
     // Function to find the length
     // of the loop in a linked list
@@ -98,6 +74,32 @@ public class Programs {
         // there is no loop
 
         return 0;
+    }
+
+    // Helper function
+    static int findLength(ListNode slow, ListNode fast){
+
+        // count to keep track of
+        // nodes encountered in loop
+        int cnt = 1;
+
+        // move fast by one step
+        fast = fast.next;
+
+        // traverse fast till it
+        // reaches back to slow
+        while(slow!=fast){
+
+            // at each node increase
+            // count by 1 and move fast
+            // forward by one step
+            cnt++;
+            fast = fast.next;
+        }
+
+        // loop terminates when fast reaches
+        // slow again and the count is returned
+        return cnt;
     }
 
     public static void main(String[] args) {
