@@ -1,4 +1,4 @@
-package Java_Bootcamp.DSA_Patterns.Subsequences;
+package Java_Bootcamp.DSA_Patterns.SubArray;
 
 import java.util.Arrays;
 import java.util.HashMap;
