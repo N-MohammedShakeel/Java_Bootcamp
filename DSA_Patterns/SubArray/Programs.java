@@ -7,14 +7,27 @@ public class Programs {
 
     public static void main(String[] args) {
 
-        int[] arr = {2,5,10};
-        int target = 15;
-        System.out.println(isSubArrayOfSumExist(arr,target));
-        System.out.println(Arrays.toString(SubArrayOfSumIndices(arr,target)));
-        System.out.println(isSubArrayOfSumExistByTwoPointer(arr,target));
-        smallestSubArrayOfSum(arr,target);
+        int[] arr = {2,1,5,1,3,2};
+        int target = 3;
+//        System.out.println(isSubArrayOfSumExist(arr,target));
+//        System.out.println(Arrays.toString(SubArrayOfSumIndices(arr,target)));
+//        System.out.println(isSubArrayOfSumExistByTwoPointer(arr,target));
+//        smallestSubArrayOfSum(arr,target);
+        smallestSubArrayOfK(arr,target);
     }
 
+    static void smallestSubArrayOfK(int[] arr, int k) {
+        int maxSum = Integer.MIN_VALUE;
+
+        for (int i = 0; i < arr.length-k+1; i++) {
+            int currentSum = 0;
+            for (int j = i; j < k; j++) {
+                currentSum += arr[j];
+            }
+            maxSum = Math.max(maxSum,currentSum);
+        }
+        System.out.println(maxSum);
+    }
 
     static void smallestSubArrayOfSum(int[] arr, int sum) {
         int minLen = Integer.MAX_VALUE;
