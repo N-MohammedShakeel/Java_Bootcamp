@@ -1,4 +1,4 @@
-package Java_Bootcamp.Leetcode.BinarySearch;
+package Java_Bootcamp.Leetcode.Array;
 
 public class leetcode_74 {
 
