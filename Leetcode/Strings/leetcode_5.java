@@ -1,4 +1,4 @@
-package Java_Bootcamp.Leetcode.StringHandling;
+package Java_Bootcamp.Leetcode.Strings;
 
 public class leetcode_5 {
     public String longestPalindrome(String s) {
