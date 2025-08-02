@@ -54,5 +54,6 @@ Java Fundamentals
     - Performs garbage collection.
   - Specific to the operating system but provides a consistent runtime environment.
 
-================
-Note: This content aligns with Oracle Certified Professional: Java SE 17 Developer exam objectives.
+
+![img.png](img.png)
+
