@@ -130,13 +130,20 @@ public class BasicMultithreadingDemo {
         }
 
         // Example 5: Synchronization (Race Condition Prevention)
-        System.out.println("\nExample 5: Synchronization");
-        Counter counter = new Counter();
-        Runnable incrementTask = counter::increment;
-        Thread t1 = new Thread(incrementTask, "T1");
-        Thread t2 = new Thread(incrementTask, "T2");
-        t1.start();
-        t2.start();
+        try{
+            System.out.println("\nExample 5: Synchronization");
+            Counter counter = new Counter();
+            Runnable incrementTask = counter::increment;
+            Thread t1 = new Thread(incrementTask, "T1");
+            Thread t2 = new Thread(incrementTask, "T2");
+            t1.start();
+            t2.start();
+
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         // Example 6: Inter-Thread Communication (Producer-Consumer)
         System.out.println("\nExample 6: Producer-Consumer");

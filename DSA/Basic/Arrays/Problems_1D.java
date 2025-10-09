@@ -2,8 +2,7 @@ package Java_Bootcamp.DSA.Basic.Arrays;
 
 import java.util.*;
 
-public class
-Problems_1D {
+public class Problems_1D {
 
     public static void main(String[] args) {
 
@@ -11,7 +10,7 @@ Problems_1D {
         int[] arr = new int[5];
         getArray(arr);
 
-
+        leaders(arr);
 //        kaarQuestion(arr);
 //        longestSubArrayOfSumByTwoPointer(arr,3);
 //        longestSubArrayOfSumByHashMap(arr,3);
@@ -64,6 +63,22 @@ Problems_1D {
 //        System.out.println(patternCheck3());
 
 //        printArray(arr);
+
+    }
+
+
+    static void leaders(int[] arr){
+
+        if(arr.length == 1) {
+            System.out.println(arr[0]);
+        }
+        boolean isleader = true;
+        for(int i=0 ; i < arr.length ; i++){
+            for (int j = i+1 ; j < arr.length ; j++){
+                if (arr[i] < arr[j]) isleader = false;
+            }
+            if (isleader) System.out.println(arr[i]);
+        }
 
     }
 
