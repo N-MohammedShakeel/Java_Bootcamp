@@ -6,7 +6,7 @@ package Java_Bootcamp.DSA.Basic.Arrays;// Arrays in Java:
 //   - Access: O(1) (direct index access).
 //   - Insertion/Deletion: O(n) (shifting elements required).
 //   - Search (unsorted): O(n), Search (sorted): O(log n) with binary search.
-// - Use cases: Store lists, matrices, or implement algorithms like two-pointer, sliding window.
+// - Use cases: Store lists, matrices, or implement algorithms like two-pointer,sliding window.
 // - Java-specific: Arrays are static, but ArrayList can be used for dynamic size.
 
 // This program demonstrates key array operations: traversal, insertion, deletion, linear search, binary search, and two-pointer technique.
