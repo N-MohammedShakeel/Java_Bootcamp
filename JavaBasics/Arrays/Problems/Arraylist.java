@@ -1,14 +1,14 @@
 package Java_Bootcamp.JavaBasics.Arrays.Problems;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
-
-public class ArrayList<I extends Number> {
+public class Arraylist {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         // Syntax
 
-        java.util.ArrayList<Integer> list = new java.util.ArrayList<>(5);
+        ArrayList<Integer> list = new ArrayList<>(5);
 
         list.add(67);
         list.add(234);

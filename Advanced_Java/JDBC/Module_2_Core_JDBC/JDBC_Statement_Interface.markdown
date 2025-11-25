@@ -1,64 +1,83 @@
 # Statement Interface
 
 ## Overview
-The `Statement` interface in JDBC is used to execute static SQL queries, including `SELECT`, `INSERT`, `UPDATE`, and `DELETE`. It is suitable for simple, non-parameterized queries but lacks security for dynamic inputs.
 
-- **Purpose**: Execute static SQL queries and retrieve results or update counts.
-- **DSA Relevance**: Involves string manipulation (SQL query construction), iteration (result set processing), and error handling, aligning with DSA concepts like strings and lists.
+The **`Statement`** interface in JDBC is the fundamental object used to execute static, **non-parameterized SQL queries**. It is suitable for simple, known commands but poses a significant security risk when used with dynamic, user-provided inputs.
 
-## Statement Interface
-- **Purpose**: Provides methods to execute SQL queries and return results.
-- **Key Methods**:
-  - `executeQuery(String sql)`: Executes a `SELECT` query, returning a `ResultSet`.
-  - `executeUpdate(String sql)`: Executes `INSERT`, `UPDATE`, or `DELETE`, returning the number of affected rows.
-  - `execute(String sql)`: Executes any SQL, returning `true` for result sets, `false` for updates.
-- **Creation**: `Statement stmt = con.createStatement();`
-- **Example**:
+* **Purpose**: Execute static SQL queries and retrieve results or update counts.
+* **Limitation**: Lacks security features for dynamic inputs (vulnerable to **SQL Injection**).
+* **DSA Relevance**: Involves string manipulation (SQL query construction), iteration (result set processing), and error handling.
+
+-----
+
+## Statement Interface Methods
+
+The `Statement` object provides methods to execute SQL queries and handle the different types of results returned by the database.
+
+* **`executeQuery(String sql)`**:
+  * Executes a **Data Query Language (DQL)** command (`SELECT` queries).
+  * **Returns**: A **`ResultSet`** object containing the query results.
+* **`executeUpdate(String sql)`**:
+  * Executes **Data Manipulation Language (DML)** commands (`INSERT`, `UPDATE`, `DELETE`) and **Data Definition Language (DDL)** commands (`CREATE`, `DROP`).
+  * **Returns**: An `int` representing the number of rows affected (or 0 for most DDL commands).
+* **`execute(String sql)`**:
+  * Executes any SQL command when the return type is unknown.
+  * **Returns**: A `boolean` (`true` if a `ResultSet` was returned, `false` otherwise).
+* **Creation**: `Statement stmt = con.createStatement();`
+
+-----
+
+## executeQuery() for SELECT Operations
+
+This method is used exclusively for retrieving data.
+
+* **Purpose**: Execute a `SELECT` query and return data in a traversable format.
+* **Usage**: Retrieve records from a `<table>`.
+* **Processing the ResultSet**:
   ```java
-  Statement stmt = con.createStatement();
-  ResultSet rs = stmt.executeQuery("SELECT * FROM employee");
-  ```
-
-## executeQuery() for SELECT
-- **Purpose**: Executes a `SELECT` query and returns a `ResultSet`.
-- **Usage**: Retrieve data from tables.
-- **Example**:
-  ```java
-  ResultSet rs = stmt.executeQuery("SELECT emp_id, ename FROM employee");
-  while (rs.next()) {
-      System.out.println(rs.getInt("emp_id") + ": " + rs.getString("ename"));
+  // Assuming 'rs' is the ResultSet from executeQuery()
+  while (rs.next()) { // Advances cursor to the next row (returns false if no more rows)
+      // Retrieve data by column name or 1-based index
+      int id = rs.getInt("<id_column>");
+      String value = rs.getString("<text_column>");
+      // ... process data
   }
   ```
-- **Note**: Use `next()` to iterate, check `isBeforeFirst()` for empty results.
+* **Note**: Always use **`rs.next()`** to iterate over the rows. Check **`rs.isBeforeFirst()`** (after `executeQuery()` but before the first `rs.next()`) to handle empty results gracefully.
 
-## executeUpdate() for INSERT/UPDATE/DELETE
-- **Purpose**: Executes DML (Data Manipulation Language) statements, returning the number of affected rows.
-- **Usage**: Modify table data (e.g., insert new employees, update salaries).
-- **Example**:
+-----
+
+## executeUpdate() for DML and DDL
+
+This method is used for commands that change the structure or content of the database.
+
+* **Purpose**: Execute DML statements (`INSERT`, `UPDATE`, `DELETE`), returning the number of affected rows.
+* **Usage**: Modify table data (e.g., insert new records, update values, delete old data).
+* **Example (DML)**:
   ```java
-  int rows = stmt.executeUpdate("INSERT INTO employee (ename, job) VALUES ('John Doe', 'Developer')");
-  System.out.println("Inserted " + rows + " row(s).");
+  // INSERT operation (using hardcoded, static values)
+  int rows = stmt.executeUpdate("INSERT INTO <table> (<column1>, <column2>) VALUES ('Static Value', 123)");
+  System.out.println("Operation affected " + rows + " row(s).");
   ```
-- **Note**: Also used for DDL (e.g., `CREATE TABLE`), returning 0.
+* **Note**: This method is also used for **DDL** statements (e.g., `CREATE TABLE`), typically returning 0 rows affected.
 
-## Best Practices
-- Use `Statement` only for static, hardcoded queries.
-- Prefer `PreparedStatement` for dynamic queries to prevent SQL injection.
-- Use `try-with-resources` to close `Statement` and `ResultSet`.
-- Check `ResultSet.isBeforeFirst()` to handle empty results.
-- Log affected rows for `executeUpdate()` to verify success.
+-----
+## Best Practices and Pitfalls Table
 
-## Common Pitfalls
-- Using `Statement` for user inputs, risking SQL injection.
-- Not closing `Statement` or `ResultSet`, causing resource leaks.
-- Ignoring return values of `executeUpdate()`.
-- Hardcoding SQL queries, reducing maintainability.
-- Not handling empty result sets, leading to `SQLException`.
+| Category | Best Practice | Common Pitfall |
+| :--- | :--- | :--- |
+| **Security** | **Prefer `PreparedStatement`** for all dynamic queries. | Using **`Statement`** for user inputs, leading to **SQL Injection**.  |
+| **Resource Mgmt.**| Use **`try-with-resources`** to automatically close `Connection`, `Statement`, and `ResultSet`. | Not closing resources, causing database **resource leaks** and connection exhaustion. |
+| **Maintainability**| Use `Statement` only for **static, hardcoded DDL/DML** commands. | Hardcoding complex or dynamic queries, reducing readability and maintainability. |
+| **Error Handling**| Log affected rows from `executeUpdate()` to verify success. Check `ResultSet.isBeforeFirst()` for empty results. | Ignoring return values of `executeUpdate()`. Not handling empty result sets. |
+-----
 
 ## Practice Task
-- **Task**: Create an `employee` table, insert 3 records using `Statement`, and retrieve all rows.
-- **Solution Approach**:
-  - Create table with `SERIAL` primary key, `VARCHAR`, and `DOUBLE PRECISION` columns.
-  - Use `executeUpdate()` for `CREATE TABLE` and `INSERT` statements.
-  - Use `executeQuery()` to retrieve and print all rows.
-  - Handle empty results and SQL exceptions.
+
+* **Task**: Implement a simple CRUD cycle using the `Statement` interface.
+* **Solution Approach**:
+  1.  Define a static SQL string for a `CREATE TABLE` command using generic columns (`<id_column> <ID_TYPE> PRIMARY KEY`, `<text_column>`, etc.).
+  2.  Use `executeUpdate()` for the `CREATE TABLE` command.
+  3.  Use `executeUpdate()` for two or three hardcoded `INSERT` statements.
+  4.  Use `executeQuery()` to retrieve all rows (`SELECT * FROM <table>`).
+  5.  Iterate and print the data using `rs.next()` and appropriate `rs.get...()` methods.

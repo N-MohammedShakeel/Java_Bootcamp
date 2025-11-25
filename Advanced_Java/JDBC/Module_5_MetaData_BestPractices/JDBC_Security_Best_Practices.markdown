@@ -1,92 +1,72 @@
-# Security & Best Practices (Continued)
+# Security & Best Practices
 
 ## Why Always Use PreparedStatement for Inputs
-- **Problem**: Using `Statement` for queries with user input can lead to SQL injection attacks. For example:
-  ```java
-  String input = "'; DROP TABLE employee; --";
-  stmt.execute("SELECT * FROM employee WHERE ename = '" + input + "'");
-  ```
-  This results in a malicious query that deletes the `employee` table.
-- **Solution**: `PreparedStatement` treats user input as data, not executable SQL, by using placeholders (`?`).
-  ```java
-  PreparedStatement pstmt = con.prepareStatement("SELECT * FROM employee WHERE ename = ?");
-  pstmt.setString(1, input);
-  ```
-- **Benefits**:
-  - Prevents SQL injection by escaping special characters.
-  - Improves performance through query plan caching.
-  - Enhances code readability with parameterized queries.
-- **Rule**: Always use `PreparedStatement` for queries involving user input or dynamic data.
+
+Using the **`PreparedStatement`** interface is the single most important security measure in JDBC.
+
+* **Problem (SQL Injection)**: The base `Statement` interface concatenates user input directly into the SQL string. This allows an attacker to inject malicious SQL commands (e.g., `'; DROP TABLE <table>; --`), leading to SQL injection.
+* **Solution**: **`PreparedStatement`** treats user input as **data**, not executable SQL code, by using **placeholders** (`?`). The database driver handles the necessary escaping and validation.
+* **Rule**: Always use **`PreparedStatement`** for any query involving user input or dynamic data.
+* **Benefits**:
+  * **Security**: Prevents **SQL injection**.
+  * **Performance**: Enables database **query plan caching**.
+
+---
 
 ## Securely Storing Credentials
-- **Problem**: Hardcoding credentials in source code (e.g., `DriverManager.getConnection(url, "postgres", "password")`) exposes sensitive information in version control or compiled binaries.
-- **Solutions**:
-  - **Properties File**: Store credentials in a `db.properties` file outside the codebase.
-    ```properties
-    db.url=jdbc:postgresql://localhost:5432/company
-    db.user=postgres
-    db.password=MSpostgres17
-    ```
-    Load using `Properties` and `FileInputStream`.
-  - **Environment Variables**: Store credentials as environment variables (e.g., `System.getenv("DB_PASSWORD")`).
-  - **Vault Solutions**: Use tools like HashiCorp Vault for enterprise-grade credential management.
-- **Best Practice**:
-  - Keep `db.properties` outside the project directory or restrict access (e.g., file permissions).
-  - Exclude properties files from version control (e.g., add to `.gitignore`).
-  - Use encryption for sensitive data in production.
+
+**Never** hardcode sensitive credentials (username, password) directly into your Java source code.
+
+* **Problem**: Hardcoding credentials exposes sensitive data in source code repositories or compiled binaries.
+* **Preferred Solutions**:
+  1.  **Properties File**: Store configuration in an external file (`db.properties`). Load it using the `Properties` class.
+    * **Best Practice**: Exclude the file from version control (`.gitignore`) and secure its location outside the application's deployment.
+  2.  **Environment Variables**: Inject credentials during application runtime using the operating system's environment variables (`System.getenv()`).
+  3.  **Vault Solutions**: Use dedicated, enterprise-grade tools (e.g., HashiCorp Vault) for secure secret management.
+
+---
 
 ## Input Validation
-- **Purpose**: Validate user inputs before binding to `PreparedStatement` to prevent invalid data or errors.
-- **Examples**:
-  - Check for null or empty strings: `if (name == null || name.trim().isEmpty())`.
-  - Validate numeric ranges: `if (salary < 0) throw new IllegalArgumentException("Salary cannot be negative");`.
-  - Sanitize inputs to match database constraints (e.g., string length, format).
-- **Benefits**:
-  - Prevents database errors (e.g., constraint violations).
-  - Enhances application reliability.
-  - Reduces unnecessary database calls.
 
-## DAO Pattern
-- **Definition**: The Data Access Object (DAO) pattern encapsulates database operations in a separate layer, promoting modularity and maintainability.
-- **Components**:
-  - **DAO Interface**: Defines methods for CRUD operations (e.g., `addEmployee`, `getEmployeeById`).
-  - **DAO Implementation**: Contains JDBC code to interact with the database.
-  - **Entity Class**: Represents a table row (e.g., `Employee` with `id`, `name`, `job`, `salary`).
-- **Benefits**:
-  - Separates business logic from database logic.
-  - Simplifies testing with mock DAOs.
-  - Enables switching databases with minimal code changes.
-- **Example**:
-  ```java
-  public interface EmployeeDAO {
-      void addEmployee(Employee emp);
-      Employee getEmployeeById(int id);
-  }
-  ```
+Validation should be performed in the Java application layer *before* the database is involved.
 
-## Best Practices
-- Always use `PreparedStatement` for dynamic queries.
-- Store credentials securely in a properties file or environment variables.
-- Validate all inputs before database operations.
-- Implement the DAO pattern for large applications to improve modularity.
-- Use `try-with-resources` for resource management.
-- Log detailed `SQLException` information for debugging.
-- Avoid concatenating user input in SQL queries, even for non-malicious cases.
-- Regularly update JDBC drivers to address security vulnerabilities.
+* **Purpose**: Validate inputs to ensure they are **semantically correct** and adhere to **database constraints** before binding them to the `PreparedStatement`.
+* **Examples**:
+  * Check for null or empty strings: `if (value == null || value.trim().isEmpty())`.
+  * Validate numeric ranges: `if (value < 0) throw new IllegalArgumentException("Cannot be negative");`.
+* **Benefits**: Prevents database constraint violations, reduces unnecessary SQL execution, and enhances application reliability.
 
-## Common Pitfalls
-- Hardcoding credentials in source code, risking exposure.
-- Using `Statement` for user inputs, enabling SQL injection.
-- Skipping input validation, leading to database errors or vulnerabilities.
-- Not using DAO pattern in complex applications, causing maintenance issues.
-- Ignoring `SQLException` details, complicating error diagnosis.
-- Not securing properties files, exposing credentials.
+---
+
+## Data Access Object (DAO) Pattern
+
+The **DAO pattern** is a structural design pattern used to encapsulate and abstract all database interaction logic.
+
+* **Definition**: The DAO layer acts as an intermediary, separating **business logic** (what the application does) from **persistence logic** (how data is stored and retrieved).
+* **Components**:
+  1.  **Entity Class**: The model representing a table row (e.g., `Record`).
+  2.  **DAO Interface**: Defines abstract CRUD methods (e.g., `addRecord`, `getRecordById`).
+  3.  **DAO Implementation**: Contains the concrete JDBC code (`Connection`, `PreparedStatement`, `try-with-resources`).
+* **Benefits**: Promotes **modularity**, simplifies **testing** (using mock DAOs), and enables easier switching of **database vendors**.
+
+---
+
+## General Best Practices Summary
+
+| Category | Best Practice | Common Pitfall |
+| :--- | :--- | :--- |
+| **Security** | Use **`PreparedStatement`** for all dynamic queries. | Using **`Statement`** with concatenated input, enabling SQL injection. |
+| **Credentials** | Store configuration in **external properties** or environment variables. | Hardcoding credentials in source code. |
+| **Validation** | Validate all inputs before database operations. | Skipping input validation, leading to database errors or vulnerabilities. |
+| **Resource Mgmt.** | Use **`try-with-resources`** for `Connection`, `PreparedStatement`, and `ResultSet`. | Not closing resources, causing connection/memory leaks. |
+| **Design** | Implement the **DAO Pattern** for modularity in complex systems. | Mixing business logic and raw JDBC code in the same class. |
+
+---
 
 ## Practice Task
-- **Task**: Implement a DAO for the `employee` table with methods to add and retrieve employees.
-- **Solution Approach**:
-  - Create an `Employee` class with fields (`id`, `name`, `job`, `salary`).
-  - Define an `EmployeeDAO` interface with `addEmployee` and `getEmployeeById`.
-  - Implement the DAO using `PreparedStatement` and credentials from `db.properties`.
-  - Validate inputs and handle exceptions.
-  - Test the DAO by adding and retrieving an employee.
+* **Task**: Implement a DAO for a generic table with methods to add and retrieve records.
+* **Solution Approach**:
+  1.  Create an **`Entity`** class (e.g., `Record`).
+  2.  Define a **`RecordDAO`** interface.
+  3.  Implement the DAO using **`PreparedStatement`** and credentials loaded from an external source.
+  4.  Implement **input validation** and handle all potential exceptions.
